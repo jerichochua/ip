@@ -1,15 +1,16 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void listUserTasks(String[] userTasks, int taskCount) {
+    public static void listUserTasks(Task[] userTasks, int taskCount) {
+        System.out.println("\tHere are your tasks:");
         for (int i = 1; i <= taskCount; i++) {
-            System.out.println("\t" + i + ". " + userTasks[i-1]);
+            System.out.println("\t" + i + ". " + userTasks[i-1].getTaskDescription());
         }
     }
 
     public static void main(String[] args) {
         String userInput;
-        String[] userTasks = new String[100];
+        Task[] userTasks = new Task[100];
         int userTasksCount = 0;
         Scanner in = new Scanner(System.in);
 
@@ -20,7 +21,8 @@ public class Duke {
             if (userInput.equals("list")) {
                 listUserTasks(userTasks, userTasksCount);
             } else {
-                userTasks[userTasksCount] = userInput;
+                Task userTask = new Task(userInput);
+                userTasks[userTasksCount] = userTask;
                 userTasksCount++;
                 System.out.println("\tadded: " + userInput);
             }
