@@ -46,7 +46,8 @@ public class Duke {
 
         System.out.println("\tadded: " + userTasks[userTasksCount]);
         userTasksCount++;
-        System.out.println("\tYou now have " + userTasksCount + " tasks in your list.");
+        String addS = (userTasksCount > 1) ? "s" : "";
+        System.out.println("\tYou now have " + userTasksCount + " task" + addS + " in your list.");
     }
 
     public static void listUserTasks(Task[] userTasks, int taskCount) {
