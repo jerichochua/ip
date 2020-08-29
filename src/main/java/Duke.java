@@ -53,7 +53,7 @@ public class Duke {
     public static void listUserTasks(Task[] userTasks, int taskCount) {
         System.out.println("\tHere are your tasks:");
         for (int i = 1; i <= taskCount; i++) {
-            System.out.format("\t%d. %s\n", i, userTasks[i-1]);
+            System.out.format("\t%d. %s\n", i, userTasks[i - 1]);
         }
     }
 
