@@ -1,51 +1,64 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void listUserTasks(Task[] userTasks, int taskCount) {
-        System.out.println("\tHere are your tasks:");
-        for (int i = 1; i <= taskCount; i++) {
-            System.out.format("\t%d. %s\n", i, userTasks[i-1].printTaskAndIcon());
-        }
-    }
-
-    public static void markTaskAsDone(Task[] userTasks, int taskNumber) {
-        if (userTasks[taskNumber-1].isDone()) {
-            System.out.println("\tThis task has already been marked as done.");
-        } else {
-            userTasks[taskNumber-1].markAsDone();
-            System.out.println("\tI have marked the following task as done:");
-            System.out.format("\t\t%s\n", userTasks[taskNumber-1].printTaskAndIcon());
-        }
-    }
+    private static final int MAX_SIZE = 100;
+    private static int userTasksCount = 0;
 
     public static void main(String[] args) {
         String userInput;
-        Task[] userTasks = new Task[100];
-        int userTasksCount = 0;
+        Task[] userTasks = new Task[MAX_SIZE];
         Scanner in = new Scanner(System.in);
 
         System.out.println("Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?");
 
         userInput = in.nextLine();
+
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 listUserTasks(userTasks, userTasksCount);
-            } else if (userInput.contains("done") && userInput.length() > 4) {
+            } else if (userInput.contains("done")) {
                 int taskNumber = Integer.parseInt(userInput.substring(5));
-                if (taskNumber > userTasksCount) {
-                    System.out.println("\tTask does not exist!");
-                } else {
-                    markTaskAsDone(userTasks, taskNumber);
-                }
+                markTaskAsDone(userTasks, taskNumber);
             } else {
-                Task userTask = new Task(userInput);
-                userTasks[userTasksCount] = userTask;
-                userTasksCount++;
-                System.out.println("\tadded: " + userInput);
+                addUserTask(userTasks, userInput);
             }
             userInput = in.nextLine();
         }
 
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void addUserTask(Task[] userTasks, String task) {
+        if (task.startsWith("todo")) {
+            task = task.replace("todo", " ").trim();
+            userTasks[userTasksCount] = new Todo(task);
+        } else if (task.startsWith("deadline")) {
+            task = task.replace("deadline", " ").trim();
+            String[] taskSplit = task.split(" /by ");
+            userTasks[userTasksCount] = new Deadline(taskSplit[0], taskSplit[1]);
+        } else if (task.startsWith("event")) {
+            task = task.replace("event", " ").trim();
+            String[] taskSplit = task.split(" /at ");
+            userTasks[userTasksCount] = new Event(taskSplit[0], taskSplit[1]);
+        } else {
+            return;
+        }
+
+        System.out.println("\tadded: " + userTasks[userTasksCount]);
+        userTasksCount++;
+        System.out.println("\tYou now have " + userTasksCount + " tasks in your list.");
+    }
+
+    public static void listUserTasks(Task[] userTasks, int taskCount) {
+        System.out.println("\tHere are your tasks:");
+        for (int i = 1; i <= taskCount; i++) {
+            System.out.format("\t%d. %s\n", i, userTasks[i-1]);
+        }
+    }
+
+    public static void markTaskAsDone(Task[] userTasks, int taskNumber) {
+        userTasks[taskNumber - 1].markAsDone();
+        System.out.println("\tI have marked the following task as done:");
+        System.out.format("\t\t%s\n", userTasks[taskNumber - 1]);
     }
 }
