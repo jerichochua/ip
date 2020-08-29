@@ -1,0 +1,13 @@
+list
+todo Homework 1
+list
+deadline Assignment 1 /by Sunday
+list
+event Meeting /at Mon 2-3pm
+list
+done 1
+list
+done 2
+done 3
+list
+bye
