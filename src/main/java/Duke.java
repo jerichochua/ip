@@ -34,7 +34,7 @@ public class Duke {
             if (task.length() > 0) {
                 userTasks[userTasksCount] = new Todo(task);
             } else {
-                System.out.println("The description of todo cannot be empty!");
+                System.out.println("\tThe description of todo cannot be empty!");
                 return;
             }
         } else if (task.startsWith("deadline")) {
@@ -43,7 +43,7 @@ public class Duke {
             if (taskSplit.length > 1) {
                 userTasks[userTasksCount] = new Deadline(taskSplit[0], taskSplit[1]);
             } else {
-                System.out.println("Description or deadline cannot be empty!");
+                System.out.println("\tDescription or deadline cannot be empty!");
                 return;
             }
         } else if (task.startsWith("event")) {
@@ -52,11 +52,11 @@ public class Duke {
             if (taskSplit.length > 1) {
                 userTasks[userTasksCount] = new Event(taskSplit[0], taskSplit[1]);
             } else {
-                System.out.println("Description or event date/time cannot be empty!");
+                System.out.println("\tDescription or event date/time cannot be empty!");
                 return;
             }
         } else {
-            System.out.println("Sorry, I don't know what that means!");
+            System.out.println("\tSorry, I don't know what that means!");
             return;
         }
 
