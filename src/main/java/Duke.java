@@ -31,16 +31,32 @@ public class Duke {
     public static void addUserTask(String task) {
         if (task.startsWith("todo")) {
             task = task.replace("todo", " ").trim();
-            userTasks[userTasksCount] = new Todo(task);
+            if (task.length() > 0) {
+                userTasks[userTasksCount] = new Todo(task);
+            } else {
+                System.out.println("The description of todo cannot be empty!");
+                return;
+            }
         } else if (task.startsWith("deadline")) {
             task = task.replace("deadline", " ").trim();
             String[] taskSplit = task.split(" /by ");
-            userTasks[userTasksCount] = new Deadline(taskSplit[0], taskSplit[1]);
+            if (taskSplit.length > 1) {
+                userTasks[userTasksCount] = new Deadline(taskSplit[0], taskSplit[1]);
+            } else {
+                System.out.println("Description or deadline cannot be empty!");
+                return;
+            }
         } else if (task.startsWith("event")) {
             task = task.replace("event", " ").trim();
             String[] taskSplit = task.split(" /at ");
-            userTasks[userTasksCount] = new Event(taskSplit[0], taskSplit[1]);
+            if (taskSplit.length > 1) {
+                userTasks[userTasksCount] = new Event(taskSplit[0], taskSplit[1]);
+            } else {
+                System.out.println("Description or event date/time cannot be empty!");
+                return;
+            }
         } else {
+            System.out.println("Sorry, I don't know what that means!");
             return;
         }
 
