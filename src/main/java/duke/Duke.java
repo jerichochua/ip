@@ -1,5 +1,10 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -11,7 +16,7 @@ public class Duke {
         String userInput;
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Hello! I'm duke.Duke" + System.lineSeparator() + "What can I do for you?");
+        System.out.println("Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?");
 
         userInput = in.nextLine();
 
