@@ -1,6 +1,6 @@
 package duke;
 
-import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
 import duke.exception.IllegalCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -20,7 +20,7 @@ public class Duke {
     private static Task[] userTasks = new Task[MAX_SIZE];
     private static int userTasksCount = 0;
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         String userInput;
         Scanner in = new Scanner(System.in);
 
@@ -35,47 +35,69 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void processUserInput(String userInput) throws DukeException {
+    public static void processUserInput(String userInput) {
         if (userInput.equals(COMMAND_LIST)) {
             listUserTasks(userTasksCount);
-        } else if (userInput.contains(COMMAND_DONE)) {
-            int taskNumber = Integer.parseInt(userInput.substring(5));
-            markTaskAsDone(taskNumber);
-        } else {
-            addUserTask(userInput);
+            return;
+        }
+
+        try {
+            String userCommand = userInput.substring(0, userInput.indexOf(" "));
+            String arguments = userInput.substring(userInput.indexOf(" ") + 1);
+            switch (userCommand) {
+            case COMMAND_TODO:
+                addTodo(arguments);
+                break;
+            case COMMAND_DEADLINE:
+                addDeadline(arguments);
+                break;
+            case COMMAND_EVENT:
+                addEvent(arguments);
+                break;
+            case COMMAND_DONE:
+                int taskNumber = Integer.parseInt(arguments);
+                markTaskAsDone(taskNumber);
+                break;
+            default:
+                throw new IllegalCommandException();
+            }
+        } catch (StringIndexOutOfBoundsException | IllegalCommandException e) {
+            System.out.println("\tWrong command entered!");
+        } catch (EmptyDescriptionException e) {
+            System.out.println("\tDescription cannot be empty!");
         }
     }
 
-    public static void addUserTask(String task) throws DukeException {
-        if (task.startsWith(COMMAND_TODO)) {
-            task = task.replace("todo", " ").trim();
-            if (task.length() == 0) {
-                throw new DukeException("No description entered");
-            }
-            userTasks[userTasksCount] = new Todo(task);
-        } else if (task.startsWith(COMMAND_DEADLINE)) {
-            task = task.replace("deadline", " ").trim();
-            String[] taskSplit = task.split(" /by ");
-            try {
-                userTasks[userTasksCount] = new Deadline(taskSplit[0], taskSplit[1]);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("\tDescription or deadline cannot be empty!");
-                return;
-            }
-        } else if (task.startsWith(COMMAND_EVENT)) {
-            task = task.replace("event", " ").trim();
-            String[] taskSplit = task.split(" /at ");
-            try {
-                userTasks[userTasksCount] = new Event(taskSplit[0], taskSplit[1]);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("\tDescription or event date/time cannot be empty!");
-                return;
-            }
-        } else {
-            throw new IllegalCommandException("Illegal command entered");
+    public static void addTodo(String description) throws EmptyDescriptionException {
+        if (description.length() == 0) {
+            throw new EmptyDescriptionException();
         }
+        userTasks[userTasksCount] = new Todo(description);
+        addTaskSuccess();
+    }
 
-        System.out.println("\tadded: " + userTasks[userTasksCount]);
+    public static void addDeadline(String arguments) {
+        String[] argumentSplit = arguments.split(" /by ");
+        try {
+            userTasks[userTasksCount] = new Deadline(argumentSplit[0], argumentSplit[1]);
+            addTaskSuccess();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\tDescription or deadline cannot be empty!");
+        }
+    }
+
+    public static void addEvent(String arguments) {
+        String[] argumentSplit = arguments.split(" /at ");
+        try {
+            userTasks[userTasksCount] = new Event(argumentSplit[0], argumentSplit[1]);
+            addTaskSuccess();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\tDescription or event date/time cannot be empty!");
+        }
+    }
+
+    public static void addTaskSuccess() {
+        System.out.println("\tAdded: " + userTasks[userTasksCount]);
         userTasksCount++;
         String addS = (userTasksCount > 1) ? "s" : "";
         System.out.println("\tYou now have " + userTasksCount + " task" + addS + " in your list.");
