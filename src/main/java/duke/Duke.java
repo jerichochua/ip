@@ -65,6 +65,8 @@ public class Duke {
             System.out.println("\tWrong command entered!");
         } catch (EmptyDescriptionException e) {
             System.out.println("\tDescription cannot be empty!");
+        } catch (NullPointerException | NumberFormatException e) {
+            System.out.println("\tInvalid task number entered!");
         }
     }
 
