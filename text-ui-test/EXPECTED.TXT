@@ -1,20 +1,15 @@
 Hello! I'm Duke
 What can I do for you?
 	Here are your tasks:
-	The description of todo cannot be empty!
 	added: [T][✘] Homework 1
 	You now have 1 task in your list.
 	Here are your tasks:
 	1. [T][✘] Homework 1
-	Description or deadline cannot be empty!
-	Description or deadline cannot be empty!
 	added: [D][✘] Assignment 1 (by: Sunday)
 	You now have 2 tasks in your list.
 	Here are your tasks:
 	1. [T][✘] Homework 1
 	2. [D][✘] Assignment 1 (by: Sunday)
-	Description or event date/time cannot be empty!
-	Description or event date/time cannot be empty!
 	added: [E][✘] Meeting (at: Mon 2-3pm)
 	You now have 3 tasks in your list.
 	Here are your tasks:
