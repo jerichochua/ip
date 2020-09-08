@@ -11,12 +11,12 @@ import java.util.Scanner;
 
 public class Duke {
     private static final int MAX_SIZE = 100;
-    public static final String COMMAND_BYE = "bye";
-    public static final String COMMAND_LIST = "list";
-    public static final String COMMAND_DONE = "done";
-    public static final String COMMAND_TODO = "todo";
-    public static final String COMMAND_DEADLINE = "deadline";
-    public static final String COMMAND_EVENT = "event";
+    private static final String COMMAND_BYE = "bye";
+    private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_TODO = "todo";
+    private static final String COMMAND_DEADLINE = "deadline";
+    private static final String COMMAND_EVENT = "event";
     private static Task[] userTasks = new Task[MAX_SIZE];
     private static int userTasksCount = 0;
 
