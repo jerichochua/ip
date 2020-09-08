@@ -25,22 +25,25 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?");
-
         userInput = in.nextLine();
 
         while (!userInput.equals(COMMAND_BYE)) {
-            if (userInput.equals(COMMAND_LIST)) {
-                listUserTasks(userTasksCount);
-            } else if (userInput.contains(COMMAND_DONE)) {
-                int taskNumber = Integer.parseInt(userInput.substring(5));
-                markTaskAsDone(taskNumber);
-            } else {
-                addUserTask(userInput);
-            }
+            processUserInput(userInput);
             userInput = in.nextLine();
         }
 
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void processUserInput(String userInput) throws DukeException {
+        if (userInput.equals(COMMAND_LIST)) {
+            listUserTasks(userTasksCount);
+        } else if (userInput.contains(COMMAND_DONE)) {
+            int taskNumber = Integer.parseInt(userInput.substring(5));
+            markTaskAsDone(taskNumber);
+        } else {
+            addUserTask(userInput);
+        }
     }
 
     public static void addUserTask(String task) throws DukeException {
