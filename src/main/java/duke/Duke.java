@@ -11,6 +11,12 @@ import java.util.Scanner;
 
 public class Duke {
     private static final int MAX_SIZE = 100;
+    public static final String COMMAND_BYE = "bye";
+    public static final String COMMAND_LIST = "list";
+    public static final String COMMAND_DONE = "done";
+    public static final String COMMAND_TODO = "todo";
+    public static final String COMMAND_DEADLINE = "deadline";
+    public static final String COMMAND_EVENT = "event";
     private static Task[] userTasks = new Task[MAX_SIZE];
     private static int userTasksCount = 0;
 
@@ -22,10 +28,10 @@ public class Duke {
 
         userInput = in.nextLine();
 
-        while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
+        while (!userInput.equals(COMMAND_BYE)) {
+            if (userInput.equals(COMMAND_LIST)) {
                 listUserTasks(userTasksCount);
-            } else if (userInput.contains("done")) {
+            } else if (userInput.contains(COMMAND_DONE)) {
                 int taskNumber = Integer.parseInt(userInput.substring(5));
                 markTaskAsDone(taskNumber);
             } else {
@@ -38,13 +44,13 @@ public class Duke {
     }
 
     public static void addUserTask(String task) throws DukeException {
-        if (task.startsWith("todo")) {
+        if (task.startsWith(COMMAND_TODO)) {
             task = task.replace("todo", " ").trim();
             if (task.length() == 0) {
                 throw new DukeException("No description entered");
             }
             userTasks[userTasksCount] = new Todo(task);
-        } else if (task.startsWith("deadline")) {
+        } else if (task.startsWith(COMMAND_DEADLINE)) {
             task = task.replace("deadline", " ").trim();
             String[] taskSplit = task.split(" /by ");
             try {
@@ -53,7 +59,7 @@ public class Duke {
                 System.out.println("\tDescription or deadline cannot be empty!");
                 return;
             }
-        } else if (task.startsWith("event")) {
+        } else if (task.startsWith(COMMAND_EVENT)) {
             task = task.replace("event", " ").trim();
             String[] taskSplit = task.split(" /at ");
             try {
