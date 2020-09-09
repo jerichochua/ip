@@ -15,6 +15,7 @@ public class Duke {
     private static final String COMMAND_BYE = "bye";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_TODO = "todo";
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
@@ -39,6 +40,8 @@ public class Duke {
     }
 
     public static void processUserInput(String userInput) {
+        int taskNumber;
+
         if (userInput.equals(COMMAND_LIST)) {
             listUserTasks(userTasksCount);
             return;
@@ -58,8 +61,12 @@ public class Duke {
                 addEvent(arguments);
                 break;
             case COMMAND_DONE:
-                int taskNumber = Integer.parseInt(arguments);
+                taskNumber = Integer.parseInt(arguments);
                 markTaskAsDone(taskNumber);
+                break;
+            case COMMAND_DELETE:
+                taskNumber = Integer.parseInt(arguments);
+                deleteTask(taskNumber);
                 break;
             default:
                 throw new IllegalCommandException();
@@ -119,6 +126,19 @@ public class Duke {
         userTasks.get(taskNumber - 1).markAsDone();
         System.out.println("\tI have marked the following task as done:");
         System.out.format("\t\t%s\n", userTasks.get(taskNumber - 1));
+    }
+
+    public static void deleteTask(int taskNumber) {
+        try {
+            Task removedTask = userTasks.remove(taskNumber - 1);
+            userTasksCount--;
+            System.out.println("\tOk, I have removed this task:");
+            System.out.format("\t\t%s\n", removedTask);
+            String addS = (userTasksCount > 1) ? "s" : "";
+            System.out.println("\tYou now have " + userTasksCount + " task" + addS + " left in your list!");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\tTask does not exist!");
+        }
     }
 
     public static void printWelcomeMessage() {
