@@ -7,6 +7,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,7 +20,7 @@ public class Duke {
     private static final String COMMAND_EVENT = "event";
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
-    private static Task[] userTasks = new Task[MAX_SIZE];
+    private static ArrayList<Task> userTasks = new ArrayList<>(MAX_SIZE);
     private static int userTasksCount = 0;
 
     public static void main(String[] args) {
@@ -76,14 +77,14 @@ public class Duke {
         if (description.length() == 0) {
             throw new EmptyDescriptionException();
         }
-        userTasks[userTasksCount] = new Todo(description);
+        userTasks.add(new Todo(description));
         addTaskSuccess();
     }
 
     public static void addDeadline(String arguments) {
         String[] argumentSplit = arguments.split(" /by ");
         try {
-            userTasks[userTasksCount] = new Deadline(argumentSplit[0], argumentSplit[1]);
+            userTasks.add(new Deadline(argumentSplit[0], argumentSplit[1]));
             addTaskSuccess();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("\tDescription or deadline cannot be empty!");
@@ -93,7 +94,7 @@ public class Duke {
     public static void addEvent(String arguments) {
         String[] argumentSplit = arguments.split(" /at ");
         try {
-            userTasks[userTasksCount] = new Event(argumentSplit[0], argumentSplit[1]);
+            userTasks.add(new Event(argumentSplit[0], argumentSplit[1]));
             addTaskSuccess();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("\tDescription or event date/time cannot be empty!");
@@ -101,7 +102,7 @@ public class Duke {
     }
 
     public static void addTaskSuccess() {
-        System.out.println("\tAdded: " + userTasks[userTasksCount]);
+        System.out.println("\tAdded: " + userTasks.get(userTasksCount));
         userTasksCount++;
         String addS = (userTasksCount > 1) ? "s" : "";
         System.out.println("\tYou now have " + userTasksCount + " task" + addS + " in your list.");
@@ -110,14 +111,14 @@ public class Duke {
     public static void listUserTasks(int taskCount) {
         System.out.println("\tHere are your tasks:");
         for (int i = 1; i <= taskCount; i++) {
-            System.out.format("\t%d. %s\n", i, userTasks[i - 1]);
+            System.out.format("\t%d. %s\n", i, userTasks.get(i - 1));
         }
     }
 
     public static void markTaskAsDone(int taskNumber) {
-        userTasks[taskNumber - 1].markAsDone();
+        userTasks.get(taskNumber - 1).markAsDone();
         System.out.println("\tI have marked the following task as done:");
-        System.out.format("\t\t%s\n", userTasks[taskNumber - 1]);
+        System.out.format("\t\t%s\n", userTasks.get(taskNumber - 1));
     }
 
     public static void printWelcomeMessage() {
