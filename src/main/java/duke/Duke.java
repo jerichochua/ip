@@ -115,9 +115,13 @@ public class Duke {
     }
 
     public static void markTaskAsDone(int taskNumber) {
-        userTasks[taskNumber - 1].markAsDone();
-        System.out.println("\tI have marked the following task as done:");
-        System.out.format("\t\t%s\n", userTasks[taskNumber - 1]);
+        try {
+            userTasks[taskNumber - 1].markAsDone();
+            System.out.println("\tI have marked the following task as done:");
+            System.out.format("\t\t%s\n", userTasks[taskNumber - 1]);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\tInvalid task number entered!");
+        }
     }
 
     public static void printWelcomeMessage() {
