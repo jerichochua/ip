@@ -17,6 +17,8 @@ public class Duke {
     private static final String COMMAND_TODO = "todo";
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
+    private static final String MESSAGE_WELCOME = "Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?";
+    private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
     private static Task[] userTasks = new Task[MAX_SIZE];
     private static int userTasksCount = 0;
 
@@ -24,7 +26,7 @@ public class Duke {
         String userInput;
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?");
+        printWelcomeMessage();
         userInput = in.nextLine();
 
         while (!userInput.equals(COMMAND_BYE)) {
@@ -32,7 +34,7 @@ public class Duke {
             userInput = in.nextLine();
         }
 
-        System.out.println("Bye. Hope to see you again soon!");
+        printExitMessage();
     }
 
     public static void processUserInput(String userInput) {
@@ -116,5 +118,13 @@ public class Duke {
         userTasks[taskNumber - 1].markAsDone();
         System.out.println("\tI have marked the following task as done:");
         System.out.format("\t\t%s\n", userTasks[taskNumber - 1]);
+    }
+
+    public static void printWelcomeMessage() {
+        System.out.println(MESSAGE_WELCOME);
+    }
+
+    public static void printExitMessage() {
+        System.out.println(MESSAGE_EXIT);
     }
 }
