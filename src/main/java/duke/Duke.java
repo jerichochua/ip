@@ -154,19 +154,21 @@ public class Duke {
 
     public static void addTasksToFile() {
         Task task;
+        int isDone;
         try {
             FileWriter file = new FileWriter(FILE_PATH);
             for (int i = 1; i <= userTasksCount; i++) {
                 task = userTasks[i - 1];
+                isDone = task.isDone() ? 1 : 0;
                 if (task.getClass() == Todo.class) {
-                    file.write(String.format("T | %s | %s\n",
-                            task.getStatusIcon(), task.getTaskDescription()));
+                    file.write(String.format("T | %d | %s\n",
+                            isDone, task.getTaskDescription()));
                 } else if (task.getClass() == Deadline.class) {
-                    file.write(String.format("D | %s | %s | %s\n",
-                            task.getStatusIcon(), task.getTaskDescription(), ((Deadline) task).getBy()));
+                    file.write(String.format("D | %d | %s | %s\n",
+                            isDone, task.getTaskDescription(), ((Deadline) task).getBy()));
                 } else if (task.getClass() == Event.class) {
-                    file.write(String.format("E | %s | %s | %s\n",
-                            task.getStatusIcon(), task.getTaskDescription(), ((Event) task).getEventAt()));
+                    file.write(String.format("E | %d | %s | %s\n",
+                            isDone, task.getTaskDescription(), ((Event) task).getEventAt()));
                 }
             }
             file.close();
@@ -190,17 +192,27 @@ public class Duke {
         }
     }
 
+    public static void checkTaskStatus(String status) {
+        if (status.equals("1")) {
+            userTasks[userTasksCount].markAsDone();
+        }
+        userTasksCount++;
+    }
+
     public static void processFileInput(String[] arguments) {
         String typeOfTask = arguments[0];
         switch (typeOfTask) {
         case "T":
-            userTasks[userTasksCount++] = new Todo(arguments[2]);
+            userTasks[userTasksCount] = new Todo(arguments[2]);
+            checkTaskStatus(arguments[1]);
             break;
         case "D":
-            userTasks[userTasksCount++] = new Deadline(arguments[2], arguments[3]);
+            userTasks[userTasksCount] = new Deadline(arguments[2], arguments[3]);
+            checkTaskStatus(arguments[1]);
             break;
         case "E":
-            userTasks[userTasksCount++] = new Event(arguments[2], arguments[3]);
+            userTasks[userTasksCount] = new Event(arguments[2], arguments[3]);
+            checkTaskStatus(arguments[1]);
             break;
         }
     }
