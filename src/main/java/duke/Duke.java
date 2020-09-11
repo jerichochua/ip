@@ -7,6 +7,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,6 +22,8 @@ public class Duke {
     private static final String COMMAND_EVENT = "event";
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
+    private static final String FILE_PATH = "data/duke.txt";
+    private static final String DIR_PATH = "data";
     private static Task[] userTasks = new Task[MAX_SIZE];
     private static int userTasksCount = 0;
 
@@ -27,6 +32,13 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         printWelcomeMessage();
+
+        try {
+            createFileAndDir();
+        } catch (IOException e) {
+            System.out.println("Error: something happened with the file...");
+        }
+
         userInput = in.nextLine();
 
         while (!userInput.equals(COMMAND_BYE)) {
@@ -34,6 +46,7 @@ public class Duke {
             userInput = in.nextLine();
         }
 
+        addTasksToFile();
         printExitMessage();
     }
 
@@ -126,5 +139,39 @@ public class Duke {
 
     public static void printExitMessage() {
         System.out.println(MESSAGE_EXIT);
+    }
+
+    public static void createFileAndDir() throws IOException {
+        File dir = new File(DIR_PATH);
+        File file = new File(FILE_PATH);
+
+        if (!dir.exists() || !file.exists()) {
+            dir.mkdir();
+            file.createNewFile();
+        }
+    }
+
+    public static void addToFile(String data) throws IOException {
+        FileWriter file = new FileWriter(FILE_PATH, true);
+        file.write(data + System.lineSeparator());
+        file.close();
+    }
+
+    public static void addTasksToFile() {
+        Task task;
+        try {
+            for (int i = 1; i <= userTasksCount; i++) {
+                task = userTasks[i - 1];
+                if (task.getClass() == Todo.class) {
+                    addToFile(String.format("T | %s | %s", task.getStatusIcon(), task.getTaskDescription()));
+                } else if (task.getClass() == Deadline.class) {
+                    addToFile(String.format("D | %s | %s | %s", task.getStatusIcon(), task.getTaskDescription(), ((Deadline) task).getBy()));
+                } else if (task.getClass() == Event.class) {
+                    addToFile(String.format("E | %s | %s | %s", task.getStatusIcon(), task.getTaskDescription(), ((Event) task).getEventAt()));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Something happened with the file creation...");
+        }
     }
 }
