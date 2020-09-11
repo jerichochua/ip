@@ -35,6 +35,7 @@ public class Duke {
 
         try {
             createFileAndDir();
+            readFile();
         } catch (IOException e) {
             System.out.println("Error: something happened with the file...");
         }
@@ -151,27 +152,56 @@ public class Duke {
         }
     }
 
-    public static void addToFile(String data) throws IOException {
-        FileWriter file = new FileWriter(FILE_PATH, true);
-        file.write(data + System.lineSeparator());
-        file.close();
-    }
-
     public static void addTasksToFile() {
         Task task;
         try {
+            FileWriter file = new FileWriter(FILE_PATH);
             for (int i = 1; i <= userTasksCount; i++) {
                 task = userTasks[i - 1];
                 if (task.getClass() == Todo.class) {
-                    addToFile(String.format("T | %s | %s", task.getStatusIcon(), task.getTaskDescription()));
+                    file.write(String.format("T | %s | %s\n",
+                            task.getStatusIcon(), task.getTaskDescription()));
                 } else if (task.getClass() == Deadline.class) {
-                    addToFile(String.format("D | %s | %s | %s", task.getStatusIcon(), task.getTaskDescription(), ((Deadline) task).getBy()));
+                    file.write(String.format("D | %s | %s | %s\n",
+                            task.getStatusIcon(), task.getTaskDescription(), ((Deadline) task).getBy()));
                 } else if (task.getClass() == Event.class) {
-                    addToFile(String.format("E | %s | %s | %s", task.getStatusIcon(), task.getTaskDescription(), ((Event) task).getEventAt()));
+                    file.write(String.format("E | %s | %s | %s\n",
+                            task.getStatusIcon(), task.getTaskDescription(), ((Event) task).getEventAt()));
                 }
             }
+            file.close();
         } catch (IOException e) {
             System.out.println("Something happened with the file creation...");
+        }
+    }
+
+    public static void readFile() throws IOException {
+        File file = new File(FILE_PATH);
+        String task;
+        String[] arguments;
+
+        if (file.exists()) {
+            Scanner readFile = new Scanner(file);
+            while (readFile.hasNext()) {
+                task = readFile.nextLine();
+                arguments = task.split(" \\| ");
+                processFileInput(arguments);
+            }
+        }
+    }
+
+    public static void processFileInput(String[] arguments) {
+        String typeOfTask = arguments[0];
+        switch (typeOfTask) {
+        case "T":
+            userTasks[userTasksCount++] = new Todo(arguments[2]);
+            break;
+        case "D":
+            userTasks[userTasksCount++] = new Deadline(arguments[2], arguments[3]);
+            break;
+        case "E":
+            userTasks[userTasksCount++] = new Event(arguments[2], arguments[3]);
+            break;
         }
     }
 }
