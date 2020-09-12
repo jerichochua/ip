@@ -8,6 +8,9 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,6 +25,8 @@ public class Duke {
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
     private static ArrayList<Task> userTasks = new ArrayList<>(MAX_SIZE);
+    private static final String FILE_PATH = "data/duke.txt";
+    private static final String DIR_PATH = "data";
     private static int userTasksCount = 0;
 
     public static void main(String[] args) {
@@ -29,6 +34,14 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         printWelcomeMessage();
+
+        try {
+            createFileAndDir();
+            readFile();
+        } catch (IOException e) {
+            System.out.println("Error: something happened with the file...");
+        }
+
         userInput = in.nextLine();
 
         while (!userInput.equals(COMMAND_BYE)) {
@@ -36,6 +49,7 @@ public class Duke {
             userInput = in.nextLine();
         }
 
+        addTasksToFile();
         printExitMessage();
     }
 
@@ -151,5 +165,80 @@ public class Duke {
 
     public static void printExitMessage() {
         System.out.println(MESSAGE_EXIT);
+    }
+
+    public static void createFileAndDir() throws IOException {
+        File dir = new File(DIR_PATH);
+        File file = new File(FILE_PATH);
+
+        if (!dir.exists() || !file.exists()) {
+            dir.mkdir();
+            file.createNewFile();
+        }
+    }
+
+    public static void addTasksToFile() {
+        Task task;
+        int isDone;
+        try {
+            FileWriter file = new FileWriter(FILE_PATH);
+            for (int i = 1; i <= userTasksCount; i++) {
+                task = userTasks.get(i - 1);
+                isDone = task.isDone() ? 1 : 0;
+                if (task.getClass() == Todo.class) {
+                    file.write(String.format("T | %d | %s\n",
+                            isDone, task.getTaskDescription()));
+                } else if (task.getClass() == Deadline.class) {
+                    file.write(String.format("D | %d | %s | %s\n",
+                            isDone, task.getTaskDescription(), ((Deadline) task).getBy()));
+                } else if (task.getClass() == Event.class) {
+                    file.write(String.format("E | %d | %s | %s\n",
+                            isDone, task.getTaskDescription(), ((Event) task).getEventAt()));
+                }
+            }
+            file.close();
+        } catch (IOException e) {
+            System.out.println("Something happened with the file creation...");
+        }
+    }
+
+    public static void readFile() throws IOException {
+        File file = new File(FILE_PATH);
+        String task;
+        String[] arguments;
+
+        if (file.exists()) {
+            Scanner readFile = new Scanner(file);
+            while (readFile.hasNext()) {
+                task = readFile.nextLine();
+                arguments = task.split(" \\| ");
+                processFileInput(arguments);
+            }
+        }
+    }
+
+    public static void checkTaskStatus(String status) {
+        if (status.equals("1")) {
+            userTasks.get(userTasksCount).markAsDone();
+        }
+        userTasksCount++;
+    }
+
+    public static void processFileInput(String[] arguments) {
+        String typeOfTask = arguments[0];
+        switch (typeOfTask) {
+        case "T":
+            userTasks.add(new Todo(arguments[2]));
+            checkTaskStatus(arguments[1]);
+            break;
+        case "D":
+            userTasks.add(new Deadline(arguments[2], arguments[3]));
+            checkTaskStatus(arguments[1]);
+            break;
+        case "E":
+            userTasks.add(new Event(arguments[2], arguments[3]));
+            checkTaskStatus(arguments[1]);
+            break;
+        }
     }
 }
