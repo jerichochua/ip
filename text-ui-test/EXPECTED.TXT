@@ -1,15 +1,18 @@
 Hello! I'm Duke
 What can I do for you?
 	Here are your tasks:
+	Description cannot be empty!
 	Added: [T][✘] Homework 1
 	You now have 1 task in your list.
 	Here are your tasks:
 	1. [T][✘] Homework 1
+	Description cannot be empty!
 	Added: [D][✘] Assignment 1 (by: Sunday)
 	You now have 2 tasks in your list.
 	Here are your tasks:
 	1. [T][✘] Homework 1
 	2. [D][✘] Assignment 1 (by: Sunday)
+	Description cannot be empty!
 	Added: [E][✘] Meeting (at: Mon 2-3pm)
 	You now have 3 tasks in your list.
 	Here are your tasks:
@@ -26,8 +29,16 @@ What can I do for you?
 		[D][✓] Assignment 1 (by: Sunday)
 	I have marked the following task as done:
 		[E][✓] Meeting (at: Mon 2-3pm)
+	Invalid task number entered!
 	Here are your tasks:
 	1. [T][✓] Homework 1
 	2. [D][✓] Assignment 1 (by: Sunday)
 	3. [E][✓] Meeting (at: Mon 2-3pm)
+	Ok, I have removed this task:
+		[T][✓] Homework 1
+	You now have 2 tasks left in your list!
+	Here are your tasks:
+	1. [D][✓] Assignment 1 (by: Sunday)
+	2. [E][✓] Meeting (at: Mon 2-3pm)
+	Task does not exist!
 Bye. Hope to see you again soon!

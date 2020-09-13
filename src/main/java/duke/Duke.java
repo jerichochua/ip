@@ -85,9 +85,9 @@ public class Duke {
             default:
                 throw new IllegalCommandException();
             }
-        } catch (StringIndexOutOfBoundsException | IllegalCommandException e) {
+        } catch (IllegalCommandException e) {
             System.out.println("\tWrong command entered!");
-        } catch (EmptyDescriptionException e) {
+        } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
             System.out.println("\tDescription cannot be empty!");
         } catch (NullPointerException | NumberFormatException e) {
             System.out.println("\tInvalid task number entered!");
