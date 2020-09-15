@@ -2,43 +2,43 @@ Hello! I'm Duke
 What can I do for you?
 	Here are your tasks:
 	Description cannot be empty!
-	Added: [T][✘] Homework 1
+	Added: [T][N] Homework 1
 	You now have 1 task in your list.
 	Here are your tasks:
-	1. [T][✘] Homework 1
+	1. [T][N] Homework 1
 	Description cannot be empty!
-	Added: [D][✘] Assignment 1 (by: Sunday)
+	Added: [D][N] Assignment 1 (by: Sunday)
 	You now have 2 tasks in your list.
 	Here are your tasks:
-	1. [T][✘] Homework 1
-	2. [D][✘] Assignment 1 (by: Sunday)
+	1. [T][N] Homework 1
+	2. [D][N] Assignment 1 (by: Sunday)
 	Description cannot be empty!
-	Added: [E][✘] Meeting (at: Mon 2-3pm)
+	Added: [E][N] Meeting (at: Mon 2-3pm)
 	You now have 3 tasks in your list.
 	Here are your tasks:
-	1. [T][✘] Homework 1
-	2. [D][✘] Assignment 1 (by: Sunday)
-	3. [E][✘] Meeting (at: Mon 2-3pm)
+	1. [T][N] Homework 1
+	2. [D][N] Assignment 1 (by: Sunday)
+	3. [E][N] Meeting (at: Mon 2-3pm)
 	I have marked the following task as done:
-		[T][✓] Homework 1
+		[T][Y] Homework 1
 	Here are your tasks:
-	1. [T][✓] Homework 1
-	2. [D][✘] Assignment 1 (by: Sunday)
-	3. [E][✘] Meeting (at: Mon 2-3pm)
+	1. [T][Y] Homework 1
+	2. [D][N] Assignment 1 (by: Sunday)
+	3. [E][N] Meeting (at: Mon 2-3pm)
 	I have marked the following task as done:
-		[D][✓] Assignment 1 (by: Sunday)
+		[D][Y] Assignment 1 (by: Sunday)
 	I have marked the following task as done:
-		[E][✓] Meeting (at: Mon 2-3pm)
+		[E][Y] Meeting (at: Mon 2-3pm)
 	Invalid task number entered!
 	Here are your tasks:
-	1. [T][✓] Homework 1
-	2. [D][✓] Assignment 1 (by: Sunday)
-	3. [E][✓] Meeting (at: Mon 2-3pm)
+	1. [T][Y] Homework 1
+	2. [D][Y] Assignment 1 (by: Sunday)
+	3. [E][Y] Meeting (at: Mon 2-3pm)
 	Ok, I have removed this task:
-		[T][✓] Homework 1
+		[T][Y] Homework 1
 	You now have 2 tasks left in your list!
 	Here are your tasks:
-	1. [D][✓] Assignment 1 (by: Sunday)
-	2. [E][✓] Meeting (at: Mon 2-3pm)
+	1. [D][Y] Assignment 1 (by: Sunday)
+	2. [E][Y] Meeting (at: Mon 2-3pm)
 	Task does not exist!
 Bye. Hope to see you again soon!

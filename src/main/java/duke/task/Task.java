@@ -17,8 +17,8 @@ public abstract class Task {
         return isDone;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+    public String getStatus() {
+        return (isDone ? "Y" : "N");
     }
 
     public void markAsDone() {
@@ -27,6 +27,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), taskDescription);
+        return String.format("[%s] %s", getStatus(), taskDescription);
     }
 }
