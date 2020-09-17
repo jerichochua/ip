@@ -2,15 +2,11 @@ package duke;
 
 import duke.exception.EmptyDescriptionException;
 import duke.exception.IllegalCommandException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
     private static final String COMMAND_BYE = "bye";
@@ -20,9 +16,8 @@ public class Duke {
     private static final String COMMAND_TODO = "todo";
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
-    private static final String FILE_PATH = "data/duke.txt";
-    private static final String DIR_PATH = "data";
 
+    private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;
 
@@ -35,10 +30,10 @@ public class Duke {
         ui.printWelcomeMessage();
 
         try {
-            createFileAndDir();
-            readFile();
+            storage = new Storage();
+            storage.readFile(tasks);
         } catch (IOException e) {
-            ui.printToUser("Error: something happened with the file...");
+            ui.printToUser("Error: The file cannot be opened or created!");
         }
 
         userInput = ui.getUserInput();
@@ -48,7 +43,12 @@ public class Duke {
             userInput = ui.getUserInput();
         }
 
-        tasks.addTasksToFile();
+        try {
+            storage.writeToFile(tasks);
+        } catch (IOException e) {
+            ui.printToUser("Error: The file cannot be written to!");
+        }
+
         ui.printExitMessage();
     }
 
@@ -91,48 +91,5 @@ public class Duke {
         } catch (NullPointerException | NumberFormatException e) {
             ui.printToUser("\tInvalid task number entered!");
         }
-    }
-
-    public static void createFileAndDir() throws IOException {
-        File dir = new File(DIR_PATH);
-        File file = new File(FILE_PATH);
-
-        if (!dir.exists() || !file.exists()) {
-            dir.mkdir();
-            file.createNewFile();
-        }
-    }
-
-    public static void readFile() throws IOException {
-        File file = new File(FILE_PATH);
-        String task;
-        String[] arguments;
-
-        if (file.exists()) {
-            Scanner readFile = new Scanner(file);
-            while (readFile.hasNext()) {
-                task = readFile.nextLine();
-                arguments = task.split(" \\| ");
-                processFileInput(arguments);
-            }
-        }
-    }
-
-    public static void processFileInput(String[] arguments) {
-        String typeOfTask = arguments[0];
-
-        switch (typeOfTask) {
-        case "T":
-            tasks.addTask(new Todo(arguments[2]));
-            break;
-        case "D":
-            tasks.addTask(new Deadline(arguments[2], arguments[3]));
-            break;
-        case "E":
-            tasks.addTask(new Event(arguments[2], arguments[3]));
-            break;
-        }
-
-        tasks.checkTaskStatus(arguments[1]);
     }
 }

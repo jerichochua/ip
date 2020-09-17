@@ -6,12 +6,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
-    private static final String FILE_PATH = "data/duke.txt";
     private final int MAX_SIZE = 100;
     private final ArrayList<Task> userTasks = new ArrayList<>(MAX_SIZE);
     private int userTasksCount = 0;
@@ -25,6 +22,14 @@ public class TaskList {
 
     public void addTask(Task task) {
         userTasks.add(task);
+    }
+
+    public Task getTask(int index) {
+        return userTasks.get(index);
+    }
+
+    public int getUserTasksCount() {
+        return userTasksCount;
     }
 
     public void checkTaskStatus(String status) {
@@ -89,34 +94,6 @@ public class TaskList {
             System.out.println("\tYou now have " + userTasksCount + " task" + addS + " left in your list!");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("\tTask does not exist!");
-        }
-    }
-
-    public void addTasksToFile() {
-        Task task;
-        int isDone;
-
-        try {
-            FileWriter file = new FileWriter(FILE_PATH);
-
-            for (int i = 1; i <= userTasksCount; i++) {
-                task = userTasks.get(i - 1);
-                isDone = task.isDone() ? 1 : 0;
-                if (task.getClass() == Todo.class) {
-                    file.write(String.format("T | %d | %s\n",
-                            isDone, task.getTaskDescription()));
-                } else if (task.getClass() == Deadline.class) {
-                    file.write(String.format("D | %d | %s | %s\n",
-                            isDone, task.getTaskDescription(), ((Deadline) task).getBy()));
-                } else if (task.getClass() == Event.class) {
-                    file.write(String.format("E | %d | %s | %s\n",
-                            isDone, task.getTaskDescription(), ((Event) task).getEventAt()));
-                }
-            }
-
-            file.close();
-        } catch (IOException e) {
-            System.out.println("Something happened with the file creation...");
         }
     }
 }
