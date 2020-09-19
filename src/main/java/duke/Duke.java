@@ -38,10 +38,8 @@ public class Duke {
                 command = parser.parseUserInput(userInput);
                 command.execute(tasks, ui, storage);
                 isExit = command.isExit();
-            } catch (IllegalCommandException e) {
+            } catch (StringIndexOutOfBoundsException | IllegalCommandException e) {
                 ui.printToUser("\tWrong command entered!");
-            } catch (StringIndexOutOfBoundsException e) {
-                ui.printToUser("\tDescription cannot be empty!");
             } catch (NullPointerException | NumberFormatException e) {
                 ui.printToUser("\tInvalid task number entered!");
             }

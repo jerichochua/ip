@@ -70,7 +70,7 @@ public class TaskList {
     }
 
     public Task markTaskAsDone(int taskNumber) throws DukeException {
-        if (taskNumber > userTasksCount) {
+        if (taskNumber > userTasksCount || taskNumber < 1) {
             throw new DukeException();
         }
 
@@ -79,7 +79,7 @@ public class TaskList {
     }
 
     public Task deleteTask(int taskNumber) throws DukeException {
-        if (taskNumber > userTasksCount) {
+        if (taskNumber > userTasksCount || taskNumber < 1) {
             throw new DukeException();
         }
 

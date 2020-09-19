@@ -18,8 +18,14 @@ public class Parser {
             return new ByeCommand();
         }
 
-        String userCommand = userInput.substring(0, userInput.indexOf(" "));
-        String arguments = userInput.substring(userInput.indexOf(" ") + 1);
+        String userCommand, arguments = "";
+
+        if (userInput.contains(" ")) {
+            userCommand = userInput.substring(0, userInput.indexOf(" "));
+            arguments = userInput.substring(userInput.indexOf(" ") + 1);
+        } else {
+            userCommand = userInput;
+        }
 
         switch (userCommand) {
         case TodoCommand.COMMAND_TODO:
