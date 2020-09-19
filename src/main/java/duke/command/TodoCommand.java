@@ -1,7 +1,9 @@
 package duke.command;
 
 import duke.exception.EmptyDescriptionException;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class TodoCommand extends Command {
     public static final String COMMAND_TODO = "todo";
@@ -12,11 +14,11 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.addTodo(arguments);
         } catch (EmptyDescriptionException e) {
-            System.out.println("\tDescription cannot be empty!");
+            ui.printToUser("\tDescription cannot be empty!");
         }
     }
 

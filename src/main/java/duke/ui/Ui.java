@@ -1,5 +1,7 @@
 package duke.ui;
 
+import duke.tasklist.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -22,5 +24,11 @@ public class Ui {
 
     public void printToUser(String message) {
         System.out.println(message);
+    }
+
+    public void printTasks(TaskList tasks) {
+        for (int i = 0; i < tasks.getUserTasksCount(); i++) {
+            printToUser(String.format("\t%d. %s", i + 1, tasks.getTask(i)));
+        }
     }
 }

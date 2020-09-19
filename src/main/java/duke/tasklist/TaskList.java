@@ -13,13 +13,6 @@ public class TaskList {
     private final ArrayList<Task> userTasks = new ArrayList<>(MAX_SIZE);
     private int userTasksCount = 0;
 
-    public void printUserTasks() {
-        System.out.println("\tHere are your tasks:");
-        for (int i = 1; i <= userTasksCount; i++) {
-            System.out.format("\t%d. %s\n", i, userTasks.get(i - 1));
-        }
-    }
-
     public void addTask(Task task) {
         userTasks.add(task);
     }
@@ -32,7 +25,7 @@ public class TaskList {
         return userTasksCount;
     }
 
-    public void checkTaskStatus(String status) {
+    public void setTaskStatus(String status) {
         if (status.equals("1")) {
             userTasks.get(userTasksCount).markAsDone();
         }

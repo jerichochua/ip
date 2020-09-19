@@ -33,10 +33,10 @@ public class Duke {
         }
 
         while (!isExit) {
-            userInput = ui.getUserInput();
             try {
+                userInput = ui.getUserInput();
                 command = parser.parseUserInput(userInput);
-                command.execute(tasks);
+                command.execute(tasks, ui, storage);
                 isExit = command.isExit();
             } catch (IllegalCommandException e) {
                 ui.printToUser("\tWrong command entered!");

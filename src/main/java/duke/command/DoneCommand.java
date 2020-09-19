@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class DoneCommand extends Command {
     public static final String COMMAND_DONE = "done";
@@ -11,7 +13,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.markTaskAsDone(taskNumber);
     }
 

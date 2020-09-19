@@ -47,7 +47,7 @@ public class Storage {
                 break;
             }
 
-            tasks.checkTaskStatus(arguments[1]);
+            tasks.setTaskStatus(arguments[1]);
         }
     }
 
