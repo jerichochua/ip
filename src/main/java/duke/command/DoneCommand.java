@@ -14,4 +14,9 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks) {
         tasks.markTaskAsDone(taskNumber);
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

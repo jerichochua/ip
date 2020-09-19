@@ -14,4 +14,9 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks) {
         tasks.addEvent(arguments);
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

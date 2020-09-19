@@ -10,8 +10,6 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 public class Duke {
-    private static final String COMMAND_BYE = "bye";
-
     private static Parser parser;
     private static Storage storage;
     private static TaskList tasks;
@@ -20,6 +18,7 @@ public class Duke {
     public static void main(String[] args) {
         String userInput;
         Command command;
+        boolean isExit = false;
 
         ui = new Ui();
         tasks = new TaskList();
@@ -33,11 +32,12 @@ public class Duke {
             ui.printToUser("\tError: The file cannot be opened or created!");
         }
 
-        do {
+        while (!isExit) {
             userInput = ui.getUserInput();
             try {
                 command = parser.parseUserInput(userInput);
                 command.execute(tasks);
+                isExit = command.isExit();
             } catch (IllegalCommandException e) {
                 ui.printToUser("\tWrong command entered!");
             } catch (StringIndexOutOfBoundsException e) {
@@ -45,7 +45,7 @@ public class Duke {
             } catch (NullPointerException | NumberFormatException e) {
                 ui.printToUser("\tInvalid task number entered!");
             }
-        } while (!userInput.equals(COMMAND_BYE));
+        }
 
         try {
             storage.writeToFile(tasks);

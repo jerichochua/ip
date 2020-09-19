@@ -9,4 +9,9 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks) {
         tasks.printUserTasks();
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

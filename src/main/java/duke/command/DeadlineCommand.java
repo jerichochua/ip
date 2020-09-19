@@ -14,4 +14,9 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks) {
         tasks.addDeadline(arguments);
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

@@ -14,4 +14,9 @@ public class DeleteCommand extends Command {
     public void execute(TaskList tasks) {
         tasks.deleteTask(taskNumber);
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

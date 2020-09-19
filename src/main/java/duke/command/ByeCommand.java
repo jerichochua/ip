@@ -7,6 +7,9 @@ public class ByeCommand extends Command {
 
     @Override
     public void execute(TaskList tasks) {
+    }
 
+    public boolean isExit() {
+        return true;
     }
 }

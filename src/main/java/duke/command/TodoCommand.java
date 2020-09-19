@@ -19,4 +19,9 @@ public class TodoCommand extends Command {
             System.out.println("\tDescription cannot be empty!");
         }
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }
