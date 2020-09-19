@@ -16,10 +16,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task;
-
         try {
-            task = tasks.deleteTask(taskNumber);
+            Task task = tasks.deleteTask(taskNumber);
             ui.printTaskDeleted(task);
             ui.printRemainingTasks(tasks);
         } catch (DukeException e) {

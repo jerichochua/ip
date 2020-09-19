@@ -33,35 +33,40 @@ public class TaskList {
         userTasksCount++;
     }
 
-    public void addTodo(String description) throws EmptyDescriptionException {
+    public Task addTodo(String description) throws EmptyDescriptionException {
         if (description.length() == 0) {
             throw new EmptyDescriptionException();
         }
-        userTasks.add(new Todo(description));
-        addTaskSuccess();
-    }
 
-    public void addDeadline(String[] arguments) {
-        try {
-            userTasks.add(new Deadline(arguments[0], arguments[1]));
-            addTaskSuccess();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("\tDescription or deadline cannot be empty!");
-        }
-    }
-
-    public void addEvent(String[] arguments) {
-        try {
-            userTasks.add(new Event(arguments[0], arguments[1]));
-            addTaskSuccess();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("\tDescription or event date/time cannot be empty!");
-        }
-    }
-
-    public void addTaskSuccess() {
-        System.out.println("\tAdded: " + userTasks.get(userTasksCount));
+        Task todo = new Todo(description);
+        userTasks.add(todo);
         userTasksCount++;
+
+        return todo;
+    }
+
+    public Task addDeadline(String[] arguments) throws EmptyDescriptionException {
+        if (arguments.length != 2) {
+            throw new EmptyDescriptionException();
+        }
+
+        Task deadline = new Deadline(arguments[0], arguments[1]);
+        userTasks.add(deadline);
+        userTasksCount++;
+
+        return deadline;
+    }
+
+    public Task addEvent(String[] arguments) throws EmptyDescriptionException {
+        if (arguments.length != 2) {
+            throw new EmptyDescriptionException();
+        }
+
+        Task event = new Event(arguments[0], arguments[1]);
+        userTasks.add(event);
+        userTasksCount++;
+
+        return event;
     }
 
     public Task markTaskAsDone(int taskNumber) throws DukeException {

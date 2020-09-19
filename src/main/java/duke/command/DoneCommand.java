@@ -16,10 +16,8 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task;
-
         try {
-            task = tasks.markTaskAsDone(taskNumber);
+            Task task = tasks.markTaskAsDone(taskNumber);
             ui.printTaskDone(task);
         } catch (DukeException e) {
             ui.printToUser("\tInvalid task number entered!");

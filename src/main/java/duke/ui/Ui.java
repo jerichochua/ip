@@ -33,6 +33,10 @@ public class Ui {
         }
     }
 
+    public void printTaskAdded(Task task) {
+        printToUser("\tAdded: " + task);
+    }
+
     public void printRemainingTasks(TaskList tasks) {
         int taskCount = tasks.getUserTasksCount();
         String addS = (taskCount > 1) ? "s" : "";

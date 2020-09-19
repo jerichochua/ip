@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.exception.EmptyDescriptionException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -15,8 +17,14 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String[] argumentSplit = arguments.split(" /at ");
-        tasks.addEvent(argumentSplit);
-        ui.printRemainingTasks(tasks);
+
+        try {
+            Task event = tasks.addEvent(argumentSplit);
+            ui.printTaskAdded(event);
+            ui.printRemainingTasks(tasks);
+        } catch (EmptyDescriptionException e) {
+            ui.printToUser("\tDescription or event date/time cannot be empty!");
+        }
     }
 
     @Override

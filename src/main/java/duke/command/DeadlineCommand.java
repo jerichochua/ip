@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.exception.EmptyDescriptionException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -15,8 +17,14 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String[] argumentSplit = arguments.split(" /by ");
-        tasks.addDeadline(argumentSplit);
-        ui.printRemainingTasks(tasks);
+
+        try {
+            Task deadline = tasks.addDeadline(argumentSplit);
+            ui.printTaskAdded(deadline);
+            ui.printRemainingTasks(tasks);
+        } catch (EmptyDescriptionException e) {
+            ui.printToUser("\tDescription or deadline cannot be empty!");
+        }
     }
 
     @Override
