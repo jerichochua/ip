@@ -15,11 +15,13 @@ import java.util.Scanner;
 public class Storage {
     private static final String FILE_PATH = "duke.txt";
 
-    public Storage() throws IOException {
+    public Storage(TaskList tasks) throws IOException {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
             file.createNewFile();
         }
+
+        readFile(tasks);
     }
 
     public void readFile(TaskList tasks) throws FileNotFoundException {

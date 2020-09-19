@@ -13,7 +13,7 @@ public class Parser {
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
 
-    public void processUserInput(TaskList tasks, String userInput) throws IllegalCommandException, EmptyDescriptionException {
+    public void parseUserInput(TaskList tasks, String userInput) throws IllegalCommandException, EmptyDescriptionException {
         int taskNumber;
 
         if (userInput.equals(COMMAND_LIST)) {

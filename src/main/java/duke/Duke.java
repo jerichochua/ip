@@ -27,8 +27,7 @@ public class Duke {
         ui.printWelcomeMessage();
 
         try {
-            storage = new Storage();
-            storage.readFile(tasks);
+            storage = new Storage(tasks);
         } catch (IOException e) {
             ui.printToUser("\tError: The file cannot be opened or created!");
         }
@@ -36,7 +35,7 @@ public class Duke {
         do {
             userInput = ui.getUserInput();
             try {
-                parser.processUserInput(tasks, userInput);
+                parser.parseUserInput(tasks, userInput);
             } catch (IllegalCommandException e) {
                 ui.printToUser("\tWrong command entered!");
             } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
