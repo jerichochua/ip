@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.task.Task;
 import duke.tasklist.TaskList;
 
 import java.util.Scanner;
@@ -26,9 +27,25 @@ public class Ui {
         System.out.println(message);
     }
 
-    public void printTasks(TaskList tasks) {
+    public void printAllTasks(TaskList tasks) {
         for (int i = 0; i < tasks.getUserTasksCount(); i++) {
             printToUser(String.format("\t%d. %s", i + 1, tasks.getTask(i)));
         }
+    }
+
+    public void printRemainingTasks(TaskList tasks) {
+        int taskCount = tasks.getUserTasksCount();
+        String addS = (taskCount > 1) ? "s" : "";
+        System.out.println("\tYou now have " + taskCount + " task" + addS + " in your list!");
+    }
+
+    public void printTaskDone(Task task) {
+        printToUser("\tI have marked the following task as done:");
+        printToUser(String.format("\t\t%s", task));
+    }
+
+    public void printTaskDeleted(Task task) {
+        printToUser("\tOk, I have removed this task:");
+        printToUser(String.format("\t\t%s", task));
     }
 }

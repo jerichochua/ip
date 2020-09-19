@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -14,7 +16,15 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.deleteTask(taskNumber);
+        Task task;
+
+        try {
+            task = tasks.deleteTask(taskNumber);
+            ui.printTaskDeleted(task);
+            ui.printRemainingTasks(tasks);
+        } catch (DukeException e) {
+            ui.printToUser("\tTask does not exist!");
+        }
     }
 
     @Override

@@ -14,7 +14,9 @@ public class DeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addDeadline(arguments);
+        String[] argumentSplit = arguments.split(" /by ");
+        tasks.addDeadline(argumentSplit);
+        ui.printRemainingTasks(tasks);
     }
 
     @Override

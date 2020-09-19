@@ -14,7 +14,9 @@ public class EventCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addEvent(arguments);
+        String[] argumentSplit = arguments.split(" /at ");
+        tasks.addEvent(argumentSplit);
+        ui.printRemainingTasks(tasks);
     }
 
     @Override

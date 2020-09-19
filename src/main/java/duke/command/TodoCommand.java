@@ -17,6 +17,7 @@ public class TodoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.addTodo(arguments);
+            ui.printRemainingTasks(tasks);
         } catch (EmptyDescriptionException e) {
             ui.printToUser("\tDescription cannot be empty!");
         }
