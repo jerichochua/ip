@@ -1,6 +1,6 @@
 package duke;
 
-import duke.exception.EmptyDescriptionException;
+import duke.command.Command;
 import duke.exception.IllegalCommandException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -19,6 +19,7 @@ public class Duke {
 
     public static void main(String[] args) {
         String userInput;
+        Command command;
 
         ui = new Ui();
         tasks = new TaskList();
@@ -35,10 +36,11 @@ public class Duke {
         do {
             userInput = ui.getUserInput();
             try {
-                parser.parseUserInput(tasks, userInput);
+                command = parser.parseUserInput(userInput);
+                command.execute(tasks);
             } catch (IllegalCommandException e) {
                 ui.printToUser("\tWrong command entered!");
-            } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
+            } catch (StringIndexOutOfBoundsException e) {
                 ui.printToUser("\tDescription cannot be empty!");
             } catch (NullPointerException | NumberFormatException e) {
                 ui.printToUser("\tInvalid task number entered!");
