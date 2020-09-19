@@ -10,12 +10,17 @@ import duke.task.Todo;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final int MAX_SIZE = 100;
-    private final ArrayList<Task> userTasks = new ArrayList<>(MAX_SIZE);
-    private int userTasksCount = 0;
+    public static final int MAX_SIZE = 100;
+    private final ArrayList<Task> userTasks;
+    private int userTasksCount;
 
-    public void addTask(Task task) {
-        userTasks.add(task);
+    public TaskList() {
+        this(new ArrayList<>(MAX_SIZE));
+    }
+
+    public TaskList(ArrayList<Task> userTasks) {
+        this.userTasks = userTasks;
+        userTasksCount = userTasks.size();
     }
 
     public Task getTask(int index) {
@@ -24,13 +29,6 @@ public class TaskList {
 
     public int getUserTasksCount() {
         return userTasksCount;
-    }
-
-    public void setTaskStatus(String status) {
-        if (status.equals("1")) {
-            userTasks.get(userTasksCount).markAsDone();
-        }
-        userTasksCount++;
     }
 
     public Task addTodo(String description) throws EmptyDescriptionException {

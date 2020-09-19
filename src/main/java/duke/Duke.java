@@ -21,15 +21,16 @@ public class Duke {
         boolean isExit = false;
 
         ui = new Ui();
-        tasks = new TaskList();
         parser = new Parser();
 
         ui.printWelcomeMessage();
 
         try {
-            storage = new Storage(tasks);
+            storage = new Storage();
+            tasks = new TaskList(storage.readFile());
         } catch (IOException e) {
             ui.printToUser("\tError: The file cannot be opened or created!");
+            tasks = new TaskList();
         }
 
         while (!isExit) {

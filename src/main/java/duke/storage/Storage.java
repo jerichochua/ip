@@ -10,44 +10,62 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
     private static final String FILE_PATH = "duke.txt";
 
-    public Storage(TaskList tasks) throws IOException {
+    public Storage() throws IOException {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
             file.createNewFile();
         }
-
-        readFile(tasks);
     }
 
-    public void readFile(TaskList tasks) throws FileNotFoundException {
-        File file = new File(FILE_PATH);
-        String task, typeOfTask;
-        String[] arguments;
+    public ArrayList<Task> readFile() throws FileNotFoundException {
+        ArrayList<Task> userTasks = new ArrayList<>(TaskList.MAX_SIZE);
 
+        File file = new File(FILE_PATH);
+        String task, typeOfTask, status, description, dateTime;
+        String[] arguments;
         Scanner readFile = new Scanner(file);
+
         while (readFile.hasNext()) {
             task = readFile.nextLine();
             arguments = task.split(" \\| ");
+
             typeOfTask = arguments[0];
+            status = arguments[1];
+            description = arguments[2];
 
             switch (typeOfTask) {
             case "T":
-                tasks.addTask(new Todo(arguments[2]));
+                Task todo = new Todo(description);
+                setTaskStatus(todo, status);
+                userTasks.add(todo);
                 break;
             case "D":
-                tasks.addTask(new Deadline(arguments[2], arguments[3]));
+                dateTime = arguments[3];
+                Task deadline = new Deadline(description, dateTime);
+                setTaskStatus(deadline, status);
+                userTasks.add(deadline);
                 break;
             case "E":
-                tasks.addTask(new Event(arguments[2], arguments[3]));
+                dateTime = arguments[3];
+                Task event = new Event(description, dateTime);
+                setTaskStatus(event, status);
+                userTasks.add(event);
                 break;
             }
+        }
 
-            tasks.setTaskStatus(arguments[1]);
+        return userTasks;
+    }
+
+    private void setTaskStatus(Task task, String status) {
+        if (status.equals("1")) {
+            task.markAsDone();
         }
     }
 

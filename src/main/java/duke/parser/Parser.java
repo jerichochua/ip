@@ -12,12 +12,6 @@ import duke.exception.IllegalCommandException;
 
 public class Parser {
     public Command parseUserInput(String userInput) throws IllegalCommandException {
-        if (userInput.equals(ListCommand.COMMAND_LIST)) {
-            return new ListCommand();
-        } else if (userInput.equals(ByeCommand.COMMAND_BYE)) {
-            return new ByeCommand();
-        }
-
         String userCommand, arguments = "";
 
         if (userInput.contains(" ")) {
@@ -28,6 +22,10 @@ public class Parser {
         }
 
         switch (userCommand) {
+        case ListCommand.COMMAND_LIST:
+            return new ListCommand();
+        case ByeCommand.COMMAND_BYE:
+            return new ByeCommand();
         case TodoCommand.COMMAND_TODO:
             return new TodoCommand(arguments);
         case DeadlineCommand.COMMAND_DEADLINE:
