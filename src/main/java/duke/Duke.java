@@ -15,15 +15,9 @@ public class Duke {
     private static TaskList tasks;
     private static Ui ui;
 
-    public static void main(String[] args) {
-        String userInput;
-        Command command;
-        boolean isExit = false;
-
+    public Duke() {
         ui = new Ui();
         parser = new Parser();
-
-        ui.printWelcomeMessage();
 
         try {
             storage = new Storage();
@@ -32,11 +26,17 @@ public class Duke {
             ui.printToUser("\tError: The file cannot be opened or created!");
             tasks = new TaskList();
         }
+    }
+
+    public void run() {
+        boolean isExit = false;
+
+        ui.printWelcomeMessage();
 
         while (!isExit) {
             try {
-                userInput = ui.getUserInput();
-                command = parser.parseUserInput(userInput);
+                String userInput = ui.getUserInput();
+                Command command = parser.parseUserInput(userInput);
                 command.execute(tasks, ui, storage);
                 isExit = command.isExit();
             } catch (StringIndexOutOfBoundsException | IllegalCommandException e) {
@@ -53,5 +53,9 @@ public class Duke {
         }
 
         ui.printExitMessage();
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
