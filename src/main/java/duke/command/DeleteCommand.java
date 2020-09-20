@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Deletes a task from the task list.
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_DELETE = "delete";
     private final int taskNumber;

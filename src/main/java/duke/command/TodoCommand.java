@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Adds a todo task to the task list.
+ */
 public class TodoCommand extends Command {
     public static final String COMMAND_TODO = "todo";
     private final String arguments;

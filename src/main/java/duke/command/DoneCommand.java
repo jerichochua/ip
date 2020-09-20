@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Sets a task as done in the task list.
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_DONE = "done";
     private final int taskNumber;

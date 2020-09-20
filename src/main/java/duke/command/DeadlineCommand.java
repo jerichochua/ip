@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Adds a deadline task to the task list.
+ */
 public class DeadlineCommand extends Command {
     public static final String COMMAND_DEADLINE = "deadline";
     private final String argumentString;

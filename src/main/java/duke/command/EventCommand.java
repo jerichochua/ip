@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Adds an event task to the task list.
+ */
 public class EventCommand extends Command {
     public static final String COMMAND_EVENT = "event";
     private final String argumentString;
