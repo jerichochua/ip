@@ -5,6 +5,9 @@ import duke.tasklist.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Handles the user's input and the printing of messages to the user.
+ */
 public class Ui {
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";

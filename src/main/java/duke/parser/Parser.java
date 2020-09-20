@@ -10,7 +10,17 @@ import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.IllegalCommandException;
 
+/**
+ * Parses the user's input.
+ */
 public class Parser {
+    /**
+     * Parses the user's input into a command.
+     *
+     * @param userInput user's input string
+     * @return a Command object to be executed
+     * @throws IllegalCommandException if the command entered does not exist
+     */
     public Command parseUserInput(String userInput) throws IllegalCommandException {
         String userCommand, arguments = "";
 
