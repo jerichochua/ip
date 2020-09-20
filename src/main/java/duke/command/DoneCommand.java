@@ -6,12 +6,14 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.io.IOException;
+
 public class DoneCommand extends Command {
     public static final String COMMAND_DONE = "done";
     private final int taskNumber;
 
-    public DoneCommand(String arguments) {
-        taskNumber = Integer.parseInt(arguments);
+    public DoneCommand(String argumentString) {
+        taskNumber = Integer.parseInt(argumentString);
     }
 
     @Override
@@ -19,8 +21,11 @@ public class DoneCommand extends Command {
         try {
             Task task = tasks.markTaskAsDone(taskNumber);
             ui.printTaskDone(task);
+            storage.writeToFile(tasks);
         } catch (DukeException e) {
             ui.printToUser("\tInvalid task number entered!");
+        } catch (IOException e) {
+            ui.printFileError();
         }
     }
 

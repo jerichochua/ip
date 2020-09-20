@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.io.IOException;
+
 public class DeleteCommand extends Command {
     public static final String COMMAND_DELETE = "delete";
     private final int taskNumber;
@@ -20,8 +22,11 @@ public class DeleteCommand extends Command {
             Task task = tasks.deleteTask(taskNumber);
             ui.printTaskDeleted(task);
             ui.printRemainingTasks(tasks);
+            storage.writeToFile(tasks);
         } catch (DukeException e) {
             ui.printToUser("\tTask does not exist!");
+        } catch (IOException e) {
+            ui.printFileError();
         }
     }
 

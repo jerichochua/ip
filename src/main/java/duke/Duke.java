@@ -23,7 +23,7 @@ public class Duke {
             storage = new Storage();
             tasks = new TaskList(storage.readFile());
         } catch (IOException e) {
-            ui.printToUser("\tError: The file cannot be opened or created!");
+            ui.printFileLoadError();
             tasks = new TaskList();
         }
     }
@@ -44,12 +44,6 @@ public class Duke {
             } catch (NullPointerException | NumberFormatException e) {
                 ui.printToUser("\tInvalid task number entered!");
             }
-        }
-
-        try {
-            storage.writeToFile(tasks);
-        } catch (IOException e) {
-            ui.printToUser("\tError: The file cannot be written to!");
         }
 
         ui.printExitMessage();

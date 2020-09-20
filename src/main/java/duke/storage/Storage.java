@@ -82,7 +82,7 @@ public class Storage {
                         isDone, task.getTaskDescription()));
             } else if (task.getClass() == Deadline.class) {
                 file.write(String.format("D | %d | %s | %s\n",
-                        isDone, task.getTaskDescription(), ((Deadline) task).getBy()));
+                        isDone, task.getTaskDescription(), ((Deadline) task).getDueDate()));
             } else if (task.getClass() == Event.class) {
                 file.write(String.format("E | %d | %s | %s\n",
                         isDone, task.getTaskDescription(), ((Event) task).getEventAt()));

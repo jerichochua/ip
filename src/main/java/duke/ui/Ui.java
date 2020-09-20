@@ -52,4 +52,12 @@ public class Ui {
         printToUser("\tOk, I have removed this task:");
         printToUser(String.format("\t\t%s", task));
     }
+
+    public void printFileError() {
+        printToUser("\tError: The file cannot be written to!");
+    }
+
+    public void printFileLoadError() {
+        printToUser("\tError: The file cannot be opened or created!");
+    }
 }

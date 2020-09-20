@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.io.IOException;
+
 public class TodoCommand extends Command {
     public static final String COMMAND_TODO = "todo";
     private final String arguments;
@@ -20,8 +22,11 @@ public class TodoCommand extends Command {
             Task todo = tasks.addTodo(arguments);
             ui.printTaskAdded(todo);
             ui.printRemainingTasks(tasks);
+            storage.writeToFile(tasks);
         } catch (EmptyDescriptionException e) {
             ui.printToUser("\tDescription cannot be empty!");
+        } catch (IOException e) {
+            ui.printFileError();
         }
     }
 
