@@ -9,6 +9,8 @@ import duke.task.Todo;
 
 import java.util.ArrayList;
 
+import static java.util.stream.Collectors.toList;
+
 public class TaskList {
     public static final int MAX_SIZE = 100;
     private final ArrayList<Task> userTasks;
@@ -85,5 +87,13 @@ public class TaskList {
         userTasksCount--;
 
         return removedTask;
+    }
+
+    public ArrayList<Task> filterByKeywords(String keywords) {
+        ArrayList<Task> filteredTasks = (ArrayList<Task>) userTasks.stream()
+                .filter((s) -> s.getTaskDescription().contains(keywords))
+                .collect(toList());
+
+        return filteredTasks;
     }
 }

@@ -3,6 +3,7 @@ package duke.ui;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -51,6 +52,13 @@ public class Ui {
     public void printTaskDeleted(Task task) {
         printToUser("\tOk, I have removed this task:");
         printToUser(String.format("\t\t%s", task));
+    }
+
+    public void printFilteredTasks(ArrayList<Task> filteredTasks) {
+        printToUser("\tHere are the matching tasks in your list:");
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            printToUser(String.format("\t\t%d. %s", i + 1, filteredTasks.get(i)));
+        }
     }
 
     public void printFileError() {
