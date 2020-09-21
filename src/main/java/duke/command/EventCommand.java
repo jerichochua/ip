@@ -7,6 +7,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 /**
  * Adds an event task to the task list.
@@ -32,6 +33,8 @@ public class EventCommand extends Command {
             ui.printToUser("\tDescription or event date/time cannot be empty!");
         } catch (IOException e) {
             ui.printFileError();
+        } catch (DateTimeParseException e) {
+            ui.printDateTimeError();
         }
     }
 

@@ -7,7 +7,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -80,12 +84,15 @@ public class TaskList {
      * @return a Task object containing the deadline task
      * @throws EmptyDescriptionException if no description or date/time is provided by the user
      */
-    public Task addDeadline(String[] arguments) throws EmptyDescriptionException {
+    public Task addDeadline(String[] arguments) throws EmptyDescriptionException, DateTimeParseException {
         if (arguments.length != 2) {
             throw new EmptyDescriptionException();
         }
 
-        Task deadline = new Deadline(arguments[0], arguments[1]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        LocalDateTime deadlineDate = LocalDateTime.parse(arguments[1], formatter);
+
+        Task deadline = new Deadline(arguments[0], deadlineDate);
         userTasks.add(deadline);
         userTasksCount++;
 
@@ -99,12 +106,15 @@ public class TaskList {
      * @return a Task object containing the event task
      * @throws EmptyDescriptionException if no description or date/time is provided by the user
      */
-    public Task addEvent(String[] arguments) throws EmptyDescriptionException {
+    public Task addEvent(String[] arguments) throws EmptyDescriptionException, DateTimeParseException {
         if (arguments.length != 2) {
             throw new EmptyDescriptionException();
         }
 
-        Task event = new Event(arguments[0], arguments[1]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        LocalDateTime eventDate = LocalDateTime.parse(arguments[1], formatter);
+
+        Task event = new Event(arguments[0], eventDate);
         userTasks.add(event);
         userTasksCount++;
 

@@ -7,6 +7,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 /**
  * Adds a deadline task to the task list.
@@ -32,6 +33,8 @@ public class DeadlineCommand extends Command {
             ui.printToUser("\tDescription or deadline cannot be empty!");
         } catch (IOException e) {
             ui.printFileError();
+        } catch (DateTimeParseException e) {
+            ui.printDateTimeError();
         }
     }
 

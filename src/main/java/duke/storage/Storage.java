@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -41,8 +42,9 @@ public class Storage {
         ArrayList<Task> userTasks = new ArrayList<>(TaskList.MAX_SIZE);
 
         File file = new File(FILE_PATH);
-        String task, typeOfTask, status, description, dateTime;
+        String task, typeOfTask, status, description;
         String[] arguments;
+        LocalDateTime dateTime;
         Scanner readFile = new Scanner(file);
 
         while (readFile.hasNext()) {
@@ -60,13 +62,13 @@ public class Storage {
                 userTasks.add(todo);
                 break;
             case "D":
-                dateTime = arguments[3];
+                dateTime = LocalDateTime.parse(arguments[3]);
                 Task deadline = new Deadline(description, dateTime);
                 setTaskStatus(deadline, status);
                 userTasks.add(deadline);
                 break;
             case "E":
-                dateTime = arguments[3];
+                dateTime = LocalDateTime.parse(arguments[3]);
                 Task event = new Event(description, dateTime);
                 setTaskStatus(event, status);
                 userTasks.add(event);
