@@ -3,10 +3,13 @@ todo
 todo Homework 1
 list
 deadline
-deadline Assignment 1 /by Sunday
+deadline Assignment 1 /by 30/9/2020 2359
 list
 event
-event Meeting /at Mon 2-3pm
+event Meeting /at 1/10/2020 1200
+todo read book
+deadline return book /by 25/10/2020 2359
+find book
 list
 done 1
 list
@@ -15,6 +18,7 @@ done 3
 done 4
 list
 delete 1
+delete 2
 list
 delete 4
 bye

@@ -3,42 +3,42 @@ What can I do for you?
 	Here are your tasks:
 	Description cannot be empty!
 	Added: [T][N] Homework 1
-	You now have 1 task in your list.
+	You now have 1 task in your list!
 	Here are your tasks:
 	1. [T][N] Homework 1
-	Description cannot be empty!
-	Added: [D][N] Assignment 1 (by: Sunday)
-	You now have 2 tasks in your list.
+	Description or deadline cannot be empty!
+	Added: [D][N] Assignment 1 (by: 30 Sep 2020 11:59 PM)
+	You now have 2 tasks in your list!
 	Here are your tasks:
 	1. [T][N] Homework 1
-	2. [D][N] Assignment 1 (by: Sunday)
-	Description cannot be empty!
-	Added: [E][N] Meeting (at: Mon 2-3pm)
-	You now have 3 tasks in your list.
+	2. [D][N] Assignment 1 (by: 30 Sep 2020 11:59 PM)
+	Description or event date/time cannot be empty!
+	Added: [E][N] Meeting (at: 1 Oct 2020 12:00 PM)
+	You now have 3 tasks in your list!
 	Here are your tasks:
 	1. [T][N] Homework 1
-	2. [D][N] Assignment 1 (by: Sunday)
-	3. [E][N] Meeting (at: Mon 2-3pm)
+	2. [D][N] Assignment 1 (by: 30 Sep 2020 11:59 PM)
+	3. [E][N] Meeting (at: 1 Oct 2020 12:00 PM)
 	I have marked the following task as done:
 		[T][Y] Homework 1
 	Here are your tasks:
 	1. [T][Y] Homework 1
-	2. [D][N] Assignment 1 (by: Sunday)
-	3. [E][N] Meeting (at: Mon 2-3pm)
+	2. [D][N] Assignment 1 (by: 30 Sep 2020 11:59 PM)
+	3. [E][N] Meeting (at: 1 Oct 2020 12:00 PM)
 	I have marked the following task as done:
-		[D][Y] Assignment 1 (by: Sunday)
+		[D][Y] Assignment 1 (by: 30 Sep 2020 11:59 PM)
 	I have marked the following task as done:
-		[E][Y] Meeting (at: Mon 2-3pm)
+		[E][Y] Meeting (at: 1 Oct 2020 12:00 PM)
 	Invalid task number entered!
 	Here are your tasks:
 	1. [T][Y] Homework 1
-	2. [D][Y] Assignment 1 (by: Sunday)
-	3. [E][Y] Meeting (at: Mon 2-3pm)
+	2. [D][Y] Assignment 1 (by: 30 Sep 2020 11:59 PM)
+	3. [E][Y] Meeting (at: 1 Oct 2020 12:00 PM)
 	Ok, I have removed this task:
 		[T][Y] Homework 1
-	You now have 2 tasks left in your list!
+	You now have 2 tasks in your list!
 	Here are your tasks:
-	1. [D][Y] Assignment 1 (by: Sunday)
-	2. [E][Y] Meeting (at: Mon 2-3pm)
+	1. [D][Y] Assignment 1 (by: 30 Sep 2020 11:59 PM)
+	2. [E][Y] Meeting (at: 1 Oct 2020 12:00 PM)
 	Task does not exist!
 Bye. Hope to see you again soon!
