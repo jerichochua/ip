@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.IllegalCommandException;
@@ -46,6 +47,8 @@ public class Parser {
             return new DoneCommand(arguments);
         case DeleteCommand.COMMAND_DELETE:
             return new DeleteCommand(arguments);
+        case FindCommand.COMMAND_FIND:
+            return new FindCommand(arguments);
         default:
             throw new IllegalCommandException();
         }
