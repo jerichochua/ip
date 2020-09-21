@@ -7,7 +7,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -88,8 +88,9 @@ public class TaskList {
             throw new EmptyDescriptionException();
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        LocalDate deadlineDate = LocalDate.parse(arguments[1], formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        LocalDateTime deadlineDate = LocalDateTime.parse(arguments[1], formatter);
+        System.out.println(deadlineDate);
 
         Task deadline = new Deadline(arguments[0], deadlineDate);
         userTasks.add(deadline);
@@ -110,8 +111,8 @@ public class TaskList {
             throw new EmptyDescriptionException();
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        LocalDate eventDate = LocalDate.parse(arguments[1], formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        LocalDateTime eventDate = LocalDateTime.parse(arguments[1], formatter);
 
         Task event = new Event(arguments[0], eventDate);
         userTasks.add(event);

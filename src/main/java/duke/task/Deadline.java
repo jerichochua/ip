@@ -1,16 +1,16 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a deadline task.
  */
 public class Deadline extends Task {
-    protected LocalDate dueDate;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
+    protected LocalDateTime dueDate;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
 
-    public Deadline(String taskDescription, LocalDate dueDate) {
+    public Deadline(String taskDescription, LocalDateTime dueDate) {
         super(taskDescription);
         this.dueDate = dueDate;
     }
@@ -18,7 +18,7 @@ public class Deadline extends Task {
     /**
      * @return the due date of the Deadline task
      */
-    public LocalDate getDueDate() {
+    public LocalDateTime getDueDate() {
         return dueDate;
     }
 
