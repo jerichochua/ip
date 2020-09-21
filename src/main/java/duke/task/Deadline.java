@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a deadline task.
+ */
 public class Deadline extends Task {
     protected String dueDate;
 
@@ -8,6 +11,9 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    /**
+     * @return the due date of the Deadline task
+     */
     public String getDueDate() {
         return dueDate;
     }

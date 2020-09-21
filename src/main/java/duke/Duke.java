@@ -15,6 +15,9 @@ public class Duke {
     private static TaskList tasks;
     private static Ui ui;
 
+    /**
+     * Sets up the required objects and loads the tasks from the file.
+     */
     public Duke() {
         ui = new Ui();
         parser = new Parser();
@@ -28,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the application until the application terminates.
+     */
     public void run() {
         boolean isExit = false;
 
