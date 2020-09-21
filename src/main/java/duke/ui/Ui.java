@@ -106,4 +106,8 @@ public class Ui {
     public void printFileLoadError() {
         printToUser("\tError: The file cannot be opened or created!");
     }
+
+    public void printDateTimeError() {
+        printToUser("\tError: Date/time cannot be recognised!");
+    }
 }
