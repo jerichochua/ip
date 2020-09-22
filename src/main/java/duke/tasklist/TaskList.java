@@ -19,6 +19,7 @@ import static java.util.stream.Collectors.toList;
  */
 public class TaskList {
     public static final int MAX_SIZE = 100;
+    public static final String DATE_TIME_PATTERN = "d/M/yyyy HHmm";
     private final ArrayList<Task> userTasks;
     private int userTasksCount;
 
@@ -89,7 +90,7 @@ public class TaskList {
             throw new EmptyDescriptionException();
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
         LocalDateTime deadlineDate = LocalDateTime.parse(arguments[1], formatter);
 
         Task deadline = new Deadline(arguments[0], deadlineDate);
@@ -111,7 +112,7 @@ public class TaskList {
             throw new EmptyDescriptionException();
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
         LocalDateTime eventDate = LocalDateTime.parse(arguments[1], formatter);
 
         Task event = new Event(arguments[0], eventDate);
@@ -155,11 +156,15 @@ public class TaskList {
         return removedTask;
     }
 
+    /**
+     * Returns a filtered ArrayList with tasks containing the given keywords.
+     *
+     * @param keywords keywords specified by the user
+     * @return an ArrayList of tasks filtered by keywords
+     */
     public ArrayList<Task> filterByKeywords(String keywords) {
-        ArrayList<Task> filteredTasks = (ArrayList<Task>) userTasks.stream()
+        return (ArrayList<Task>) userTasks.stream()
                 .filter((s) -> s.getTaskDescription().contains(keywords))
                 .collect(toList());
-
-        return filteredTasks;
     }
 }

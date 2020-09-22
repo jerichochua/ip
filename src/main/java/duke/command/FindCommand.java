@@ -7,6 +7,9 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Finds tasks with a specified keyword in the task list.
+ */
 public class FindCommand extends Command {
     public static final String COMMAND_FIND = "find";
     private final String keywords;
