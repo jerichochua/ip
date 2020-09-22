@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.exception.IllegalIndexException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
             ui.printTaskDeleted(task);
             ui.printRemainingTasks(tasks);
             storage.writeToFile(tasks);
-        } catch (DukeException e) {
+        } catch (IllegalIndexException e) {
             ui.printToUser("\tTask does not exist!");
         } catch (IOException e) {
             ui.printFileError();

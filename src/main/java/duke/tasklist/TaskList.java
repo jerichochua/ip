@@ -1,7 +1,7 @@
 package duke.tasklist;
 
-import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
+import duke.exception.IllegalIndexException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -127,11 +127,11 @@ public class TaskList {
      *
      * @param taskNumber the index of the task in this task list to mark as done
      * @return the Task object at the specified task number in this task list that is marked as done
-     * @throws DukeException if the number provided by the user is invalid
+     * @throws IllegalIndexException if the number provided by the user is invalid
      */
-    public Task markTaskAsDone(int taskNumber) throws DukeException {
+    public Task markTaskAsDone(int taskNumber) throws IllegalIndexException {
         if (taskNumber > userTasksCount || taskNumber < 1) {
-            throw new DukeException();
+            throw new IllegalIndexException();
         }
 
         userTasks.get(taskNumber - 1).markAsDone();
@@ -143,11 +143,11 @@ public class TaskList {
      *
      * @param taskNumber the index of the task in this task list to delete
      * @return the Task object at the specified task number in this task list that is deleted
-     * @throws DukeException if the number provided by the user is invalid
+     * @throws IllegalIndexException if the number provided by the user is invalid
      */
-    public Task deleteTask(int taskNumber) throws DukeException {
+    public Task deleteTask(int taskNumber) throws IllegalIndexException {
         if (taskNumber > userTasksCount || taskNumber < 1) {
-            throw new DukeException();
+            throw new IllegalIndexException();
         }
 
         Task removedTask = userTasks.remove(taskNumber - 1);
