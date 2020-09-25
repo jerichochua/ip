@@ -2,6 +2,19 @@
 
 Duke is a command-line application, helping you to manage your todos, deadlines and events effectively.
 
+- [Features](#features)
+- [Usage](#usage)
+    - [`todo` - Adding a todo](#todo---adding-a-todo)
+    - [`deadline` - Adding a deadline](#deadline---adding-a-deadline)
+    - [`event` - Adding an event](#event---adding-an-event)
+    - [`list` - Listing all tasks](#list---listing-all-tasks)
+    - [`find` - Finding a task by keyword](#find---finding-a-task-by-keyword)
+    - [`done` - Marking a task as done](#done---marking-a-task-as-done)
+    - [`delete` - Deleting a task](#delete---deleting-a-task)
+    - [`clear` - Clearing all tasks](#clear---clearing-all-tasks)
+    - [`bye` - Exiting application](#bye---exiting-application)
+- [Command summary](#command-summary)
+
 ## Features 
 
 ### Add your tasks
@@ -165,14 +178,28 @@ Expected outcome:
 Your task list has been cleared!
 ```
 
-### `exit` - Exiting application
+### `bye` - Exiting application
 
 Exits the application.
 
-Format: `exit`
+Format: `bye`
 
 Expected outcome:
 
 ```
 Bye. Hope to see you again soon!
 ```
+
+## Command summary
+
+Action | Format | Examples
+------ | -------| --------
+todo | `todo DESCRIPTION` | `todo homework`
+deadline | `deadline DESCRIPTION /by DATE TIME` | `deadline assignment /by 05/01/2020 1800`
+event | `event DESCRIPTION /at DATE TIME` | `event meeting /at 05/01/2020 1800`
+list | `list`
+find | `find KEYWORD` | `find book`
+done | `done INDEX` | `done 2`
+delete | `delete INDEX` | `delete 1`
+clear | `clear`
+bye | `bye`
