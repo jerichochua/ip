@@ -24,6 +24,8 @@ Adds a todo task to the application.
 
 Format: `todo DESCRIPTION`
 
+- Description must not contain `|` (vertical bar character)
+
 Example of usage:
 
 `todo homework`
@@ -43,6 +45,7 @@ Format: `deadline DESCRIPTION /by DATE TIME`
 
 - `DATE` must be of the following format: `dd/mm/yyyy`
 - `TIME` must be specified in the 24-hours format e.g. `1800` for 6pm
+- Description must not contain `|` (vertical bar character)
 
 Example of usage:
 
@@ -63,6 +66,7 @@ Format: `event DESCRIPTION /at DATE TIME`
 
 - `DATE` must be of the following format: `dd/mm/yyyy`
 - `TIME` must be specified in the 24-hours format e.g. `1800` for 6pm
+- Description must not contain `|` (vertical bar character)
 
 Example of usage:
 

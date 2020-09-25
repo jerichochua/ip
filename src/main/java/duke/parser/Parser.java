@@ -11,6 +11,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.IllegalCommandException;
+import duke.exception.IllegalDescriptionException;
 
 /**
  * Parses the user's input.
@@ -22,11 +23,14 @@ public class Parser {
      * @param userInput user's input string
      * @return a Command object to be executed
      * @throws IllegalCommandException if the command entered does not exist
+     * @throws IllegalDescriptionException if the description entered contains illegal characters
      */
-    public Command parseUserInput(String userInput) throws IllegalCommandException {
+    public Command parseUserInput(String userInput) throws IllegalCommandException, IllegalDescriptionException {
         String userCommand, arguments = "";
 
-        if (userInput.contains(" ")) {
+        if (userInput.contains("|")) {
+            throw new IllegalDescriptionException();
+        } else if (userInput.contains(" ")) {
             userCommand = userInput.substring(0, userInput.indexOf(" "));
             arguments = userInput.substring(userInput.indexOf(" ") + 1);
         } else {

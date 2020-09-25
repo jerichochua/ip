@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.IllegalCommandException;
+import duke.exception.IllegalDescriptionException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -49,6 +50,8 @@ public class Duke {
                 ui.printToUser("\tWrong command entered!");
             } catch (NullPointerException | NumberFormatException e) {
                 ui.printToUser("\tInvalid task number entered!");
+            } catch (IllegalDescriptionException e) {
+                ui.printToUser("\tDescription cannot contain '|'!");
             }
         }
 
