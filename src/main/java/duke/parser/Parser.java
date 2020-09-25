@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.command.ByeCommand;
+import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -49,6 +50,8 @@ public class Parser {
             return new DeleteCommand(arguments);
         case FindCommand.COMMAND_FIND:
             return new FindCommand(arguments);
+        case ClearCommand.COMMAND_CLEAR:
+            return new ClearCommand();
         default:
             throw new IllegalCommandException();
         }

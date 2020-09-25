@@ -167,4 +167,9 @@ public class TaskList {
                 .filter((s) -> s.getTaskDescription().contains(keywords))
                 .collect(toList());
     }
+
+    public void clearTaskList() {
+        userTasks.clear();
+        userTasksCount = 0;
+    }
 }

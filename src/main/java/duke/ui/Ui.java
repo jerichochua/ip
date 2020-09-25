@@ -99,6 +99,10 @@ public class Ui {
         }
     }
 
+    public void printTasksCleared() {
+        printToUser("\tYour task list has been cleared!");
+    }
+
     public void printFileError() {
         printToUser("\tError: The file cannot be written to!");
     }
