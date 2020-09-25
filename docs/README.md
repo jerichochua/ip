@@ -149,6 +149,18 @@ Ok, I have removed this task:
 You now have 2 tasks in your list!
 ```
 
+### `clear` - Clearing all tasks
+
+Clears all the tasks in the task list.
+
+Format: `clear`
+
+Expected outcome:
+
+```
+Your task list has been cleared!
+```
+
 ### `exit` - Exiting application
 
 Exits the application.
