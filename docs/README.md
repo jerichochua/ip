@@ -1,6 +1,6 @@
 # User Guide
 
-Duke is a command-line application, helping you to manage your todos, deadlines and events effectively.
+Duke is a desktop application, helping you to manage your todos, deadlines and events effectively, using a command-line interface.
 
 - [Features](#features)
 - [Usage](#usage)
@@ -113,7 +113,8 @@ Finds tasks whose names contain the keywords.
 
 Format: `find KEYWORD`
 
-- If no keywords are supplied, then all the tasks will be shown to the user, similar to using `list`.
+- Keywords are **case-sensitive**, i.e. `book` is not the same as `Book`
+- If no keywords are supplied, then all the tasks will be shown to the user, similar to using `list`
 
 Example of usage:
 
