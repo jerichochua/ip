@@ -17,7 +17,7 @@ public class DeadlineCommand extends Command {
     private final String argumentString;
 
     public DeadlineCommand(String argumentString) {
-        this.argumentString = argumentString;
+        this.argumentString = argumentString.trim();
     }
 
     @Override

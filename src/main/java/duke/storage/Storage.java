@@ -105,14 +105,14 @@ public class Storage {
         for (int i = 0; i < tasks.getUserTasksCount(); i++) {
             task = tasks.getTask(i);
             isDone = task.isDone() ? 1 : 0;
-            if (task.getClass() == Todo.class) {
-                file.write(String.format("T | %d | %s\n",
+            if (task instanceof Todo) {
+                file.write(String.format(Todo.FILE_FORMAT,
                         isDone, task.getTaskDescription()));
-            } else if (task.getClass() == Deadline.class) {
-                file.write(String.format("D | %d | %s | %s\n",
+            } else if (task instanceof Deadline) {
+                file.write(String.format(Deadline.FILE_FORMAT,
                         isDone, task.getTaskDescription(), ((Deadline) task).getDueDate()));
-            } else if (task.getClass() == Event.class) {
-                file.write(String.format("E | %d | %s | %s\n",
+            } else if (task instanceof Event) {
+                file.write(String.format(Event.FILE_FORMAT,
                         isDone, task.getTaskDescription(), ((Event) task).getEventAt()));
             }
         }

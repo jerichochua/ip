@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
  * Represents an event task.
  */
 public class Event extends Task {
+    public static final String FILE_FORMAT = "E | %d | %s | %s" + System.lineSeparator();
+    private static final String MESSAGE_FORMAT = "[E]%s (at: %s)";
+
     protected LocalDateTime eventAt;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
 
@@ -24,6 +27,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + eventAt.format(formatter) + ")";
+        return String.format(MESSAGE_FORMAT, super.toString(), eventAt.format(formatter));
     }
 }

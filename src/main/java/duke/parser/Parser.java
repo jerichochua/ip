@@ -13,10 +13,15 @@ import duke.command.TodoCommand;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalDescriptionException;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Parses the user's input.
  */
 public class Parser {
+    public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<command>\\S+)(?<arguments>.*)");
+
     /**
      * Parses the user's input into a command.
      *
@@ -26,15 +31,17 @@ public class Parser {
      * @throws IllegalDescriptionException if the description entered contains illegal characters
      */
     public Command parseUserInput(String userInput) throws IllegalCommandException, IllegalDescriptionException {
-        String userCommand, arguments = "";
+        Matcher matcher = COMMAND_FORMAT.matcher(userInput.trim());
 
-        if (userInput.contains("|")) {
+        if (!matcher.matches()) {
+            throw new IllegalCommandException();
+        }
+
+        String userCommand = matcher.group("command").toLowerCase();
+        String arguments = matcher.group("arguments");
+
+        if (arguments.contains("|")) {
             throw new IllegalDescriptionException();
-        } else if (userInput.contains(" ")) {
-            userCommand = userInput.substring(0, userInput.indexOf(" "));
-            arguments = userInput.substring(userInput.indexOf(" ") + 1);
-        } else {
-            userCommand = userInput;
         }
 
         switch (userCommand) {

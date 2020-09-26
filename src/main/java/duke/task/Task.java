@@ -4,6 +4,7 @@ package duke.task;
  * Represents a generic task.
  */
 public abstract class Task {
+    private static final String MESSAGE_FORMAT = "[%s] %s";
     protected String taskDescription;
     protected boolean isDone;
 
@@ -52,6 +53,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatus(), taskDescription);
+        return String.format(MESSAGE_FORMAT, getStatus(), taskDescription);
     }
 }

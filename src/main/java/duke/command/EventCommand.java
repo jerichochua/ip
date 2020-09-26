@@ -17,7 +17,7 @@ public class EventCommand extends Command {
     private final String argumentString;
 
     public EventCommand(String argumentString) {
-        this.argumentString = argumentString;
+        this.argumentString = argumentString.trim();
     }
 
     @Override

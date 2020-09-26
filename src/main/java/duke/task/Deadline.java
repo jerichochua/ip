@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline task.
  */
 public class Deadline extends Task {
+    public static final String FILE_FORMAT = "D | %d | %s | %s" + System.lineSeparator();
+    private static final String MESSAGE_FORMAT = "[D]%s (by: %s)";
+
     protected LocalDateTime dueDate;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
 
@@ -24,6 +27,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dueDate.format(formatter) + ")";
+        return String.format(MESSAGE_FORMAT, super.toString(), dueDate.format(formatter));
     }
 }

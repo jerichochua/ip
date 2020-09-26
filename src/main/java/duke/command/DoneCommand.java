@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
     private final int taskNumber;
 
     public DoneCommand(String argumentString) {
-        taskNumber = Integer.parseInt(argumentString);
+        taskNumber = Integer.parseInt(argumentString.trim());
     }
 
     @Override

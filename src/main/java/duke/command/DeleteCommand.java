@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     private final int taskNumber;
 
     public DeleteCommand(String arguments) {
-        taskNumber = Integer.parseInt(arguments);
+        taskNumber = Integer.parseInt(arguments.trim());
     }
 
     @Override

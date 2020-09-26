@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toList;
  */
 public class TaskList {
     public static final int MAX_SIZE = 100;
-    public static final String DATE_TIME_PATTERN = "d/M/yyyy HHmm";
+    private static final String DATE_TIME_PATTERN = "d/M/yyyy HHmm";
     private final ArrayList<Task> userTasks;
     private int userTasksCount;
 
@@ -84,6 +84,7 @@ public class TaskList {
      * @param arguments the description and date/time of the deadline task
      * @return a Task object containing the deadline task
      * @throws EmptyDescriptionException if no description or date/time is provided by the user
+     * @throws DateTimeParseException if the date/time cannot be parsed
      */
     public Task addDeadline(String[] arguments) throws EmptyDescriptionException, DateTimeParseException {
         if (arguments.length != 2) {
@@ -106,6 +107,7 @@ public class TaskList {
      * @param arguments the description and date/time of the event task
      * @return a Task object containing the event task
      * @throws EmptyDescriptionException if no description or date/time is provided by the user
+     * @throws DateTimeParseException if the date/time cannot be parsed
      */
     public Task addEvent(String[] arguments) throws EmptyDescriptionException, DateTimeParseException {
         if (arguments.length != 2) {
@@ -168,6 +170,9 @@ public class TaskList {
                 .collect(toList());
     }
 
+    /**
+     * Clears the task list, and sets the task count to 0.
+     */
     public void clearTaskList() {
         userTasks.clear();
         userTasksCount = 0;

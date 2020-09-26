@@ -16,7 +16,7 @@ public class TodoCommand extends Command {
     private final String arguments;
 
     public TodoCommand(String arguments) {
-        this.arguments = arguments;
+        this.arguments = arguments.trim();
     }
 
     @Override

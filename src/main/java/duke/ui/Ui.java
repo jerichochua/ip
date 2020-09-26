@@ -92,6 +92,11 @@ public class Ui {
         printToUser(String.format("\t\t%s", task));
     }
 
+    /**
+     * Prints all the tasks that have been filtered by a keyword.
+     *
+     * @param filteredTasks the filtered task list
+     */
     public void printFilteredTasks(ArrayList<Task> filteredTasks) {
         printToUser("\tHere are the matching tasks in your list:");
         for (int i = 0; i < filteredTasks.size(); i++) {
