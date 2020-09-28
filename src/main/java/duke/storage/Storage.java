@@ -19,6 +19,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private static final String FILE_PATH = "duke.txt";
+    private static final String DELIMITER = " \\| ";
 
     /**
      * Creates a new file if it does not exist.
@@ -49,7 +50,7 @@ public class Storage {
 
         while (readFile.hasNext()) {
             task = readFile.nextLine();
-            arguments = task.split(" \\| ");
+            arguments = task.split(DELIMITER);
 
             typeOfTask = arguments[0];
             status = arguments[1];

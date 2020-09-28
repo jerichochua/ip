@@ -47,11 +47,11 @@ public class Duke {
                 command.execute(tasks, ui, storage);
                 isExit = command.isExit();
             } catch (StringIndexOutOfBoundsException | IllegalCommandException e) {
-                ui.printToUser("\tWrong command entered!");
+                ui.printWrongCommandEntered();
             } catch (NullPointerException | NumberFormatException e) {
-                ui.printToUser("\tInvalid task number entered!");
+                ui.printInvalidTaskNumberEntered();
             } catch (IllegalDescriptionException e) {
-                ui.printToUser("\tDescription cannot contain '|'!");
+                ui.printInvalidDescriptionError();
             }
         }
 

@@ -104,6 +104,18 @@ public class Ui {
         }
     }
 
+    public void printWrongCommandEntered() {
+        printToUser("\tError: Wrong command entered!");
+    }
+
+    public void printInvalidTaskNumberEntered() {
+        printToUser("\tError: Invalid task number entered!");
+    }
+
+    public void printInvalidDescriptionError() {
+        printToUser("\tDescription cannot contain '|'!");
+    }
+
     public void printTasksCleared() {
         printToUser("\tYour task list has been cleared!");
     }

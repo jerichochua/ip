@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
             ui.printTaskDone(task);
             storage.writeToFile(tasks);
         } catch (IllegalIndexException e) {
-            ui.printToUser("\tInvalid task number entered!");
+            ui.printInvalidTaskNumberEntered();
         } catch (IOException e) {
             ui.printFileError();
         }
